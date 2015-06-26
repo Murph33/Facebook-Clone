@@ -1,0 +1,14 @@
+<%= simple_form_for @user do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <% if @user.persisted? %>
+    <%= f.input :current_password %>
+  <% end %>
+  <%= f.input :gender, collection: @user.give_genders, as: :radio_buttons %>
+  <%= f.label :birth_date %>
+  <%= f.date_field :birth_date %>
+  <%= f.button :submit %>
+<% end %>

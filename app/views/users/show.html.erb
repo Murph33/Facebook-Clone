@@ -1,0 +1,26 @@
+<h1> All About <%= @user.full_name %>
+
+
+
+<h4> Hey there <%= current_user.first_name %>!  What's new?</h4>
+<% if @user == current_user %>
+  <%= form_for [@user, @status] do |f| %>
+
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+<% @user.statuses.each do |status| %>
+  <div>
+    <%= @user.full_name %>:<%= status.body %>
+    <%= status.created_at %>
+  </div>
+<% end %>
+
+<% @friends.each do |friend| %>
+  <div class="">
+    <%= friend.full_name %> <%= link_to "Unfriend",
+     user_friendship_path(current_user,friend),   method: :delete %>
+  </div>
+<% end %>

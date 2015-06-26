@@ -1,0 +1,13 @@
+<h1> Login Here!</h1>
+
+<%= form_tag sessions_path do %>
+  <div class="inline">
+    <%= label_tag :email %>
+    <%= email_field_tag :email %>
+  </div>
+  <div class="inline">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <%= submit_tag %>
+<% end %>
