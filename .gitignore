@@ -14,4 +14,4 @@
 usefulthings.text
 notes.text
 .DS_Store
-/public/uploads/user/picture
+/public/uploads/user/*
