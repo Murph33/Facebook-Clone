@@ -1,0 +1,9 @@
+<%= form_for [current_user, @status], remote: true do |f| %>
+  <div class="well">
+    <div>
+      <%= f.text_area :body, size: "55x5", placeholder: "What's on your mind?",
+            class: "borderless"%>
+    </div>
+    <%= f.submit "Post", class: "button-colors white" %>
+  </div>
+<% end %>

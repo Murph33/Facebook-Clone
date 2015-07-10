@@ -1,0 +1,35 @@
+
+<nav class="navbar navbar-default navbar-fixed row">
+  <div class="container">
+    <div class="container-margins">
+      <div class="collapse navbar-collapse inline" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left slim" role="search">
+          <div class="form-group slim">
+            <%= link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
+                    root_path, class: 'inline' %>
+            <input type="text" class="form-control inline slim" placeholder="Search">
+            <button type="submit" class="btn-primary button-colors">Submit</button>
+          </div>
+
+        </form>
+
+        <div class="navbar-right margin-top">
+
+          <div class="button btn-primary button-colors inline ">
+            <%= link_to current_user, class: "btn-primary button inline button-colors" do %>
+              <%= image_tag current_user.picture.url(:navbar), class: "" %>
+            <%= current_user.first_name %>
+            <% end %>
+          </div>
+          <%= link_to "Home", root_path,method: :get, class: "btn-primary button-colors button inline" %>
+          <%= link_to "Edit Profile", edit_user_path(current_user), method: :get, class: "btn-primary button-colors button inline"  %>
+          <%= link_to "Signout", sessions_path(current_user), method: :delete, class: "btn-primary button-colors button inline" %>
+          <%= link_to "User List", users_path, method: :get, class: "btn-primary button-colors button inline" %>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</nav>

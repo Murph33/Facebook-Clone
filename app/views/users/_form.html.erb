@@ -8,6 +8,7 @@
     <%= f.input :current_password %>
   <% end %>
   <%= f.input :gender, collection: @user.give_genders, as: :radio_buttons %>
+  <%= f.input :picture %>
   <%= f.label :birth_date %>
   <%= f.date_field :birth_date %>
   <%= f.button :submit %>

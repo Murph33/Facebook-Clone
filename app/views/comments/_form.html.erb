@@ -1,0 +1,10 @@
+<% @comment ||= Comment.new %>
+<%= form_for [commentable, @comment], remote: true do |f| %>
+  <div class="overflow">
+    <%= f.label :body, class: "lfloat" do %>
+      <%= image_tag current_user.picture.url(:comment), class: "inline comment_image  top" %>
+    <% end %>
+    <%= f.text_area :body, placeholder: "Write a comment...", size:"60x2", class: " no_outline"  %>
+  </div>
+
+<% end %>

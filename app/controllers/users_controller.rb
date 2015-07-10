@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate_user!, except: [:home, :new, :create]
+
   def index
     @users = User.all
   end
@@ -17,13 +19,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_params = params.require(:user).permit(:first_name, :last_name,
-                    :email, :password, :password_confirmation, :gender, :birth_date)
-    @user = User.new user_params
 
+    @user = User.new user_params
+    @user.profile = Profile.new
     if @user.save
       session[:user_id] = @user.id
-      redirect_to @user, notice: "Welcome to Facebook"
+      redirect_to @user, notice: "Welcome to Fakebook"
     else
       render :new, alert: "Something went wrong!"
     end
@@ -34,8 +35,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    user_params = params.require(:user).permit(:first_name, :last_name,
-                    :email, :password, :password_confirmation, :gender, :birth_date)
     @user = User.find session[:user_id]
     if @user.authenticate(params[:user][:current_password]) && @user.update(user_params)
       redirect_to @user, notice: "Profile updated!"
@@ -46,11 +45,25 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
+    @statuses = @user.statuses
     @status = Status.new
-    @friends = (@user.friends + @user.inverse_friends).shuffle
+    @post = Post.new
+    @comment = Comment.new
+    @friends = (@user.all_friends).shuffle
   end
 
   def destroy
 
+  end
+
+  def friends
+
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password,
+                  :password_confirmation, :gender, :birth_date, :picture)
   end
 end

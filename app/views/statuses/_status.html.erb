@@ -1,0 +1,50 @@
+<div class="post" id="<%= dom_id(status) %>">
+  <div class="status_top_half">
+    <div>
+      <%= link_to status.user do %>
+        <%= image_tag status.user.picture.url(:avatar), class: "inline clearfix" %>
+      <% end %>
+      <div class="inline">
+        <%= link_to status.user.full_name, status.user %> <br>
+        <span class="date"><%= formatted_date(status.created_at) %></span>
+      </div>
+      <div class="status_body">
+        <%= status.body %>
+      </div>
+      <div>
+        <% if status.liking_users.include? current_user %>
+          <%= link_to "Unlike", like_path(status.like_for current_user),
+              method: :delete, remote: true %>
+        <% else %>
+          <%= link_to "Like", status_likes_path(status), method: :post, remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="status_bottom_half">
+    <% if status.likes.any? %>
+      <div class="like_box">
+        <% if status.liking_users.include? current_user %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>
+          You like this.
+          <% if status.liking_users.length > 2 %>
+            <%= status.liking_users.length - 1 %> other people do too.
+          <% elsif status.liking_users.length == 2 %>
+            <%= status.liking_users.length - 1 %> other person does too.
+          <% end %>
+        <% else %>
+        <%= link_to "<i class='glyphicon glyphicon-thumbs-up'></i>".html_safe,
+                status_likes_path(status), method: :status, remote: true  %>
+          <% if status.liking_users.length > 1 %>
+            <%= status.liking_users.length %> people liked this.
+          <% elsif status.liking_users.length == 1 %>
+            1 person liked this.
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="comment_box">
+      comment box temp holder
+    </div>
+  </div>
+</div>

@@ -52,6 +52,11 @@ GEM
     byebug (5.0.0)
       columnize (= 0.9.0)
     cancancan (1.10.1)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     choice (0.2.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -101,12 +106,15 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
+    mini_magick (4.2.7)
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.2)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -195,6 +203,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   cancancan
+  carrierwave
   coffee-rails (~> 4.1.0)
   delayed_job_active_record
   delayed_job_web
@@ -205,7 +214,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
+  mini_magick
   pg
+  quiet_assets
   rails (= 4.2.1)
   rails-erd
   sass-rails (~> 5.0)

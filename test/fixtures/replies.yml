@@ -2,10 +2,10 @@
 
 one:
   body: MyText
-  status_id: 
+  comment_id: 
   user_id: 
 
 two:
   body: MyText
-  status_id: 
+  comment_id: 
   user_id: 

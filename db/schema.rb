@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625153140) do
+ActiveRecord::Schema.define(version: 20150710192432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "albums", ["user_id"], name: "index_albums_on_user_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,24 +48,70 @@ ActiveRecord::Schema.define(version: 20150625153140) do
   add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
   add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
+  create_table "jobs", force: :cascade do |t|
+    t.string   "title"
+    t.string   "company"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "likeable_id"
+    t.string   "likeable_type"
+  end
+
+  add_index "likes", ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
   create_table "photos", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "album_id"
   end
 
+  add_index "photos", ["album_id"], name: "index_photos_on_album_id", using: :btree
   add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "postee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "body"
+    t.integer  "poster_id"
+  end
+
+  add_index "posts", ["postee_id"], name: "index_posts_on_postee_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "cover_photo"
+    t.string   "birth_place"
+    t.string   "residence"
+    t.string   "phone"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "replies", force: :cascade do |t|
     t.text     "body"
-    t.integer  "status_id"
+    t.integer  "comment_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "replies", ["status_id"], name: "index_replies_on_status_id", using: :btree
+  add_index "replies", ["comment_id"], name: "index_replies_on_comment_id", using: :btree
   add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
@@ -75,10 +142,17 @@ ActiveRecord::Schema.define(version: 20150625153140) do
     t.datetime "updated_at",      null: false
     t.date     "birth_date"
     t.string   "gender"
+    t.string   "picture"
   end
 
+  add_foreign_key "albums", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "jobs", "users"
+  add_foreign_key "likes", "users"
+  add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
-  add_foreign_key "replies", "statuses"
+  add_foreign_key "profiles", "users"
+  add_foreign_key "replies", "comments"
   add_foreign_key "replies", "users"
   add_foreign_key "statuses", "users"
 end

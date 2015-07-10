@@ -1,0 +1,4 @@
+var target = $('#<%= dom_id(@commentable, :comment_box) %>')
+target.append("<%= j render partial: @commentable.comments.last %>")
+<% @comment = Comment.new %>
+target.parent().find('#new_comment').replaceWith("<%= j render 'comments/form', commentable: @commentable  %>")

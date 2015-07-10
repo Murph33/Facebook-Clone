@@ -1,0 +1,16 @@
+<div class="comment_area" id="<%= dom_id(comment) %>">
+  <%= link_to comment.user do %>
+    <%= image_tag comment.user.picture.url(:comment), class: "inline comment_image  top" %>
+  <% end %>
+  <div class="inline comment_text">
+    <div>
+      <%= link_to comment.user.full_name, comment.user %> <%= comment.body %>
+    </div>
+    <% if comment.liking_users.include?(current_user) %>
+      <%= link_to "Unlike", like_path(comment.like_for(current_user)),
+                      method: :delete, remote: true %>
+    <% else %>
+      <%= link_to "Like", comment_likes_path(comment), method: :post, remote: true %>
+    <% end %>
+  </div>
+</div>

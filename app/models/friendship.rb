@@ -5,6 +5,16 @@ class Friendship < ActiveRecord::Base
   validates :friend_id, uniqueness: {scope: :user_id}, presence: true
   validate :not_self
   validates :user_id, presence: true
+  validate :no_duplicate
+
+  private
+
+  def no_duplicate
+    if (Friendship.find_friendship User.find(user_id), User.find(friend_id)).present?
+      errors.add(:user_id, "Only one friendship between a pair")
+    end
+  end
+
   def not_self
     if user_id == friend_id
       errors.add(:user_id, "Can't friend yourself")
@@ -16,4 +26,5 @@ class Friendship < ActiveRecord::Base
               (user_id = :friend_id  AND friend_id = :user_id)",
               {user_id: user.id, friend_id: friend.id})
   end
+
 end

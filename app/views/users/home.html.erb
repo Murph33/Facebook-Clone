@@ -1,48 +1,35 @@
-<% if @current_user %>
-
-  <h4> Hey there <%= current_user.first_name %>!  What's new?</h4>
-
-  <%= simple_form_for [current_user, @status] do |f| %>
-
-    <%= f.input :body %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
-
 <% unless current_user %>
-<br><br><br><br>
-<h3>Sign up for Facebook!</h3>
-  <%= simple_form_for @user do |f| %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :email %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
-    <% if @user.persisted? %>
-      <%= f.input :current_password %>
-    <% end %>
-    <%= f.input :gender, collection: @user.give_genders, as: :radio_buttons %>
-    <%= f.label :birth_date %>
-    <%= f.date_field :birth_date %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
-
-<% @statuses.each do |status| %>
-  <div>
-    <%= status.user.full_name %> updated:
-    <%= status.body %>
-  </div>
+<br><br>
+<h3>Sign up for Fakebook!</h3>
+  <%= render 'form' %>
 <% end %>
 <% if @current_user %>
-  <% if @current_user.passive_requests %>
+  <div class="col-lg-2"></div>
+  <div class="col-lg-7">
 
-    <% @current_user.passive_requests.each do |req| %>
 
-      <%= req.requester.full_name %> Wants to be your friend.
-      <%= link_to "Accept?", user_friendships_path(req.requester), method: :post %>
-      <%= link_to "Ignore?", user_request_path(current_user,req.requester.id), method: :delete %>
+
+    <%= render 'statuses/form' %>
+
+    <div id="home_feed">
+      <% @statuses.each do |status| %>
+        <%= render "statuses/status", status: status %>
+      <% end %>
+    </div>
+
+
+
+    <% if @current_user.passive_requests %>
+
+      <% @current_user.passive_requests.each do |req| %>
+
+        <%= req.requester.full_name %> wants to be your friend.
+        <%= link_to "Accept?", user_friendships_path(req.requester), method: :post %>
+        <%= link_to "Ignore?", user_request_path(current_user,req.requester.id), method: :delete %>
+
+      <% end %>
+
 
     <% end %>
-  <% end %>
+  </div>
 <% end %>

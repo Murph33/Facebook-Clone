@@ -1,0 +1,55 @@
+<div class="post" id="<%= dom_id(post) %>">
+  <div class="post_top_half">
+    <div>
+      <%= link_to post.poster do %>
+        <%= image_tag post.poster.picture.url(:avatar), class: "inline clearfix" %>
+      <% end %>
+      <div class="inline">
+        <%= link_to post.poster.full_name, post.poster %> <i class="glyphicon glyphicon-arrow-right"></i> <%= link_to post.postee.full_name, post.postee %><br>
+        <span class="date"><%= formatted_date(post.created_at) %></span>
+      </div>
+      <div>
+        <%= post.body %>
+      </div>
+    </div>
+
+    <% if post.liking_users.include? current_user %>
+      <%= link_to "Unlike", like_path(post.like_for(current_user)), method: :delete, remote: true %>
+    <% else %>
+      <%= link_to "Like", post_likes_path(post), method: :post, remote: true %>
+    <% end %>
+  </div>
+  <div class="post_bottom_half">
+    <% if post.likes.any? %>
+      <div class="like_box">
+        <% if post.liking_users.include? current_user %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>
+          You like this.
+          <% if post.liking_users.length > 2 %>
+            <%= post.liking_users.length - 1 %> other people do too.
+          <% elsif post.liking_users.length == 2 %>
+            <%= post.liking_users.length - 1 %> other person does too.
+          <% end %>
+        <% else %>
+        <%= link_to "<i class='glyphicon glyphicon-thumbs-up'></i>".html_safe,
+                post_likes_path(post), method: :post, remote: true  %>
+          <% if post.liking_users.length > 1 %>
+            <%= post.liking_users.length %> people liked this.
+          <% elsif post.liking_users.length == 1 %>
+            1 person liked this.
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="comment_box" id="<%= dom_id(post, :comment_box) %>">
+      <div class="comment_area">
+        <% post.comments.order(:created_at).each do |comment| %>
+          <%= render partial: comment %>
+        <% end %>
+      </div>
+    </div>
+      <div>
+        <%= render "comments/form", commentable: post %>
+      </div>
+  </div>
+</div>

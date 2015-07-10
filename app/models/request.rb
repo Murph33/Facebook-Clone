@@ -6,6 +6,14 @@ class Request < ActiveRecord::Base
   validates :requester_id, presence: true
   validates :requestee_id, presence: true, uniqueness: {scope: :requester_id}
 
+  private
+
+  def self.find_request requester, requestee
+    where("(requester_id = :requester_id  AND requestee_id = :requestee_id) OR
+              (requester_id = :requestee_id  AND requestee_id = :requester_id)",
+              {requestee_id: requester.id, requester_id: requestee.id})
+  end
+
   def no_inverse
     if User.find(requester_id).requester_ids.include?(requestee_id)
       errors.add(:requester_id, "Don't duplicate requests")
@@ -16,10 +24,5 @@ class Request < ActiveRecord::Base
     if requester_id == requestee_id
       errors.add(:requester_id, "Can't friend yourself")
     end
-  end
-  def self.find_request requester, requestee
-    where("(requester_id = :requester_id  AND friend_id = :friend_id) OR
-              (user_id = :friend_id  AND friend_id = :user_id)",
-              {user_id: user.id, friend_id: friend.id})
   end
 end

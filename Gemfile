@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 gem 'rails', '4.2.1'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -16,11 +17,15 @@ gem 'bootstrap-sass'
 gem 'cancancan'
 gem 'friendly_id'
 gem "simple_form"
+gem 'carrierwave'
+gem "mini_magick"
+gem "quiet_assets"
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development, :test do
+  gem "faker"
   gem 'byebug'
   gem "hirb"
   gem "awesome_print"

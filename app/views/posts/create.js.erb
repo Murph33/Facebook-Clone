@@ -1,0 +1,4 @@
+<% @comment = Comment.new %>
+$('#newsfeed').prepend("<%= j render 'post', post: @post %>")
+<% @post = Post.new %>
+$('#new_post').replaceWith("<%= j render 'form' %>")

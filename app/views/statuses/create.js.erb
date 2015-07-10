@@ -1,0 +1,6 @@
+// if ($('#home_feed')) {
+$('#newsfeed').prepend("<%= j render 'status', status: @status %>");
+// } else if ($('#'))
+$('#home_feed').prepend("<%= j render 'status', status: @status %>");
+<% @status = Status.new %>
+$('#new_status').replaceWith("<%= j render 'form' %>")

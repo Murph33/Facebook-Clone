@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+usefulthings.text
+notes.text
+.DS_Store

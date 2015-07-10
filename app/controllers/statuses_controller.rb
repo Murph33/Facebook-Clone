@@ -5,10 +5,14 @@ class StatusesController < ApplicationController
     @status = Status.new status_params
     user = User.find current_user
     @status.user = user
-    if @status.save
-      redirect_to root_path, notice: "Status posted"
-    else
-      render "/users/home", alert: "Something broke"
+    respond_to do |format|
+      if @status.save
+        format.js { render }
+        format.html { redirect_to root_path, notice: "Status posted" }
+      else
+        format.js { render "create_failure" }
+        format.html { render "/users/home", alert: "Something broke" }
+      end
     end
   end
 

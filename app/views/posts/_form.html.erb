@@ -1,0 +1,10 @@
+<%= form_for [@user, @post], remote: true do |f| %>
+<div class="well">
+  <div>
+    <div><%= f.text_area :body, size: "55x5", placeholder: "Write something...",
+          class: "borderless"%>
+    </div>
+  <%= f.submit "Post", class: "button-colors white" %>
+  </div>
+</div>
+<% end %>

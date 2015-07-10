@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="container-margins">
+      <div class="">
+        <a class="navbar-brand " id="facebook-title" href="/">fakebook</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <div class="inline">
+          <%= form_tag sessions_path method: :post do %>
+            <div class="inline push_bot">
+              <%= label_tag :email %> <br>
+              <span class="black_text">
+                <%= email_field_tag :email, value = nil, tabindex: '1' %> <br>
+              </span>
+              <%= check_box_tag :store_session, tabindex: '3', checked: 'unchecked' %>
+              <span class="grey">
+                <%= label_tag :store_session, "Keep me logged in" %>
+              </span>
+            </div>
+            <div class="inline push_bot">
+              <%= label_tag :password %> <br>
+              <span class="black_text">
+                <%= password_field_tag :password, value = nil, tabindex: '2' %>
+              </span>
+
+                <%= submit_tag "Log In", tabindex: '4', class: "button-colors" %>
+
+              <br>
+              <span class="grey">
+                <%= link_to "Forgot your password?", "#" %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
