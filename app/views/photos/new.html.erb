@@ -1,0 +1,10 @@
+<h1>add a photo</h1>
+<%= simple_form_for [current_user,@photo], remote: true, authenticity_token: true do |f| %>
+
+  <%# f.text_field :description %>
+  <%= f.input :description %>
+  <%= f.input :image %>
+  <%# f.file_field :image %>
+  <%= f.collection_select :album_id, current_user.albums, :id, :title %>
+  <%= f.submit %>
+<% end %>

@@ -15,8 +15,10 @@
 ##  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id",
 #              dependent: :destroy
 
-  has_one :profile
-  mount_uploader :picture, PictureUploader
+  after_create :on_create
+
+  has_one :profile, dependent: :destroy
+  mount_uploader :picture, ProfilePictureUploader
 
   has_many :requesters, through: :passive_requests
   has_many :requestees, through: :active_requests
@@ -28,6 +30,7 @@
   has_many :inverse_friends, through: :inverse_friendships, source: :user
   has_many :inverse_friendships, class_name: :Friendship, foreign_key: :friend_id, dependent: :destroy
 
+  has_many :albums, dependent: :destroy
 
   has_many :likes, dependent: :destroy
   has_many :liked_photos, through: :likes, source: :likeable, source_type: :Photo
@@ -101,10 +104,10 @@
 
   def age
     unless birth_date > (Date.today - 115.years)
-      errors.add(:birth_date, "You aren't that old")
+      errors.add(:birth_date, "you aren't that old")
     end
     if birth_date > (Date.today - 13.years)
-      errors.add(:birth_date, "Must be 13 or older")
+      errors.add(:birth_date, "must be 13 or older")
     end
   end
   def validate_gender
@@ -115,6 +118,12 @@
 
   def full_name
     "#{first_name} #{last_name}".strip.squeeze(" ")
+  end
+
+  def on_create
+    Profile.create user_id: id
+    albums.create title: "Timeline Photos"
+    albums.create title: "Profile Pictures"
   end
 
   # def liked_posts

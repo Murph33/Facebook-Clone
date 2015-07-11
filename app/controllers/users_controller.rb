@@ -50,6 +50,9 @@ class UsersController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @friends = (@user.all_friends).shuffle
+    @photos = @user.photos.order("created_at desc")
+    #SHOULD ADD SOMETHING THAT IS LIKE user.all_photos AND INCLUDED TAGGED PHOTOS.
+    #..... once I implement tagging LOL!
   end
 
   def destroy

@@ -43,8 +43,15 @@
         <% end %>
       </div>
     <% end %>
-    <div class="comment_box">
-      comment box temp holder
+    <div class="comment_box" id="<%= dom_id(status, :comment_box) %>">
+      <div class="comment_area">
+        <% status.comments.order(:created_at).each do |comment| %>
+          <%= render partial: comment %>
+        <% end %>
+      </div>
     </div>
+      <div>
+        <%= render "comments/form", commentable: status %>
+      </div>
   </div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710192432) do
+ActiveRecord::Schema.define(version: 20150711005742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,12 +70,23 @@ ActiveRecord::Schema.define(version: 20150710192432) do
   add_index "likes", ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
-  create_table "photos", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "user_id"
+  create_table "pastings", force: :cascade do |t|
+    t.integer  "photo_id"
+    t.integer  "album_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  add_index "pastings", ["album_id"], name: "index_pastings_on_album_id", using: :btree
+  add_index "pastings", ["photo_id"], name: "index_pastings_on_photo_id", using: :btree
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "album_id"
+    t.text     "description"
+    t.string   "image"
   end
 
   add_index "photos", ["album_id"], name: "index_photos_on_album_id", using: :btree
@@ -149,6 +160,8 @@ ActiveRecord::Schema.define(version: 20150710192432) do
   add_foreign_key "comments", "users"
   add_foreign_key "jobs", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "pastings", "albums"
+  add_foreign_key "pastings", "photos"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
   add_foreign_key "profiles", "users"

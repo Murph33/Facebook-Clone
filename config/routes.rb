@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   get "sessions" => "users#home"
 
   get "/users/:id/friends" => "users#friends", as: "users_friends"
+  
   resources :likes, only: [:destroy]
   resources :users, except: [] do
     resources :statuses, only: [:create, :edit, :update, :destroy]
     resources :friendships
     resources :requests
     resources :posts
+    resources :photos, only: [:create, :new, :destroy, :update, :index]
   end
 # resources :status, only: [:create, :edit, :update, :destroy]
   resources :posts, only: [] do

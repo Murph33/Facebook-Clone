@@ -3,7 +3,7 @@ class StatusesController < ApplicationController
   def create
     status_params = params.require(:status).permit(:body)
     @status = Status.new status_params
-    user = User.find current_user
+    user = User.find current_user.id
     @status.user = user
     respond_to do |format|
       if @status.save

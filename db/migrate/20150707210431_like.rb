@@ -4,7 +4,7 @@ class Like < ActiveRecord::Migration
     remove_column :likes, :post_id
 
     remove_column :likes, :photo_id
-    remove_column :likes, :reply_id
+    # remove_column :likes, :reply_id
 
   end
 end

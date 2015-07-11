@@ -33,7 +33,9 @@
   z-index: 9;
   bottom: 0px;
   left: 30px;
+  background-color: grey;
 }
+
 
 #cover_photo_text {
   font-size: 2.2em;
@@ -43,6 +45,14 @@
   left: 200px;
   bottom: 40px;
 
+}
+
+.no_padding {
+  padding: 0px;
+}
+
+.width100 {
+  width: 100%;
 }
 
 .space_holder {
@@ -138,8 +148,10 @@
 
 .comment_text {
   font-size: .9em;
-  width: 410px;
+  width: 90%;
   float: right;
+  overflow:auto;
+  word-wrap: break-word;
 }
 
 .comment_area {
@@ -245,10 +257,33 @@
   height: 33px;
   border-bottom: 2px solid white;
 
+}
+#friend_header_text {
+  position: absolute;
+  left: 15px;
+  top: 5px;
+  font-weight: bold;
+}
+
+#photo_box {
+  width: 318px;
+  height: 315px;
+  border: 1px solid #DFE0E4;
+  top: 40px;
+  position: relative;
+}
+
+#photo_box_header {
+  position: relative;
+  right: -2px;
+  width: 99.5%;
+  background-color: #F6F7F8;
+  height: 33px;
+  border-bottom: 2px solid white;
 
 }
 
-#friend_header_text {
+#photo_header_text {
   position: absolute;
   left: 15px;
   top: 5px;
