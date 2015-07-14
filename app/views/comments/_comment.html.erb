@@ -1,8 +1,10 @@
 <div class="comment_area <%= dom_id(comment, :feed) %>">
-  <%= link_to comment.user do %>
+  <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 no_padding"><%= link_to comment.user do %>
     <%= image_tag comment.user.picture.url(:comment), class: "inline comment_image  top" %>
   <% end %>
-  <div class="inline comment_text width92">
+  </div>
+  <!-- <div class="inline comment_text width92"> -->
+  <div class="inline no_padding comment_text col-lg-11 col-md-11 col-sm-10 col-xs-8">
     <div>
       <%= link_to comment.user.full_name, comment.user %> <%= comment.body %>
     </div>

@@ -1,94 +1,88 @@
-
-<nav class="navbar navbar-default navbar-fixed row">
-  <div class="container">
-    <div class="container-margins">
-      <div class="collapse navbar-collapse inline" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left slim" role="search">
-          <div class="form-group slim">
-            <%= link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
-                    root_path, class: 'inline' %>
-            <div class="inline search_bar">
-              <input type="text" name="search_bar"
-              class="width85 inline slim borderless2" placeholder="  Search Fakebook">
-              <button type="submit" class="rfloat btn-primary button-colors">Submit</button>
-            </div>
-            <div id="replaceable"></div>
-          </div>
-
-        </form>
-        <!-- <div>
-          <div class="slim">
-            <%= link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
-                    root_path, class: 'inline' %>
-            <input type="text" class="form-control inline slim" placeholder="Search">
-            <button type="submit" class="btn-primary button-colors">Submit</button>
-          </div>
-        </div> -->
-        <div class="navbar-right margin-top">
-
-          <div class="button btn-primary button-colors inline ">
-            <%= link_to current_user, class: "btn-primary button inline button-colors" do %>
-              <%= image_tag current_user.picture.url(:navbar), class: "" %>
-            <%= current_user.first_name %>
-            <% end %>
-          </div>
-          <%= link_to "Home", root_path,method: :get, class: "btn-primary button-colors button inline" %>
-          <%= link_to "Edit Profile", edit_users_path(current_user), method: :get, class: "btn-primary button-colors button inline"  %>
-          <%= link_to "Signout", sessions_path(current_user), method: :delete, class: "btn-primary button-colors button inline" %>
-          <%= link_to "User List", users_path, method: :get, class: "btn-primary button-colors button inline" %>
-          <% if current_user.passive_requests.any? %>
-            <div class="dropdown inline">
-              <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="glyphicon glyphicon-user friend_requests_active"></i>
-              </a>
-
-              <ul class="dropdown-menu" >
-                <li>
-                  <div class="friend_request_header">
-                    Friend requests
-                  </div>
-                </li>
-                <% current_user.passive_requests.each do |req| %>
-                  <li>
-                    <div class="friend_request_area" id="<%= dom_id(req) %>">
-                      <div class="lfloat">
-                        <%= link_to req.requester do %>
-                          <%= image_tag req.requester.picture.url(:avatar), class: "lfloat" %>
-                        <% end %>
-                        <div class="inline nudge_down small_padding">
-                          <%= link_to req.requester.full_name, req.requester %><br>
-                          <% if current_user.mutual_friends(req.requester)  %>
-                            <span class="date">
-                              <%= current_user.mutual_friends(req.requester).length %>
-                              mutual friends
-                            </span>
-                          <% end %>
-                        </div>
-                      </div>
-                      <div class="rfloat relative ">
-                        <div class="vertical_centre">
-                          <%= link_to "Accept?", user_friendships_path(req.requester),
-                              class: "button-request button-colors", method: :post,
-                                remote: true %>
-                          <%= link_to "Delete Request?", user_request_path(current_user,req.requester.id),
-                              method: :delete, class: "button-request", remote: true %>
-                        </div >
-                      </div>
-                    </div>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-
-
-          <% else %>
-              <i class="glyphicon glyphicon-user friend_requests_inactive"></i>
-          <% end %>
+<div class="container navbar-fixed">
+  <div class="container-margins">
+    <form class="navbar-form navbar-left slim col-lg-8 col-md-6 col-sm-6" role="search">
+      <div class="form-group width100 slim">
+        <%= link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
+                root_path, class: 'inline' %>
+        <div class="inline search_bar">
+          <input type="text" name="search_bar"
+          class="width85 inline slim borderless2" placeholder="  Search Fakebook">
+          <button type="submit" class="rfloat btn-primary button-colors">Submit</button>
         </div>
+        <div id="replaceable"></div>
+      </div>
+    </form>
+    <div class="navbar-right margin-top col-lg-4 col-md-4 col-sm-4">
 
-
-
+      <div class="button btn-primary button-colors inline ">
+        <%= link_to current_user, class: "btn-primary button inline button-colors" do %>
+          <%= image_tag current_user.picture.url(:navbar), class: "" %>
+        <%= current_user.first_name %>
+        <% end %>
+      </div>
+      <%= link_to "Home", root_path,method: :get, class: "btn-primary button-colors button inline" %>
+      <%= link_to "User List", users_path, method: :get, class: "btn-primary button-colors button inline" %>
+      <% if current_user.passive_requests.any? %>
+        <div class="dropdown inline">
+          <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-user friend_requests_active"></i>
+          </a>
+          <ul class="dropdown-menu" >
+            <li>
+              <div class="friend_request_header">
+                Friend requests
+              </div>
+            </li>
+            <% current_user.passive_requests.each do |req| %>
+              <li>
+                <div class="friend_request_area" id="<%= dom_id(req) %>">
+                  <div class="lfloat">
+                    <%= link_to req.requester do %>
+                      <%= image_tag req.requester.picture.url(:avatar), class: "lfloat" %>
+                    <% end %>
+                    <div class="inline nudge_down small_padding">
+                      <%= link_to req.requester.full_name, req.requester %><br>
+                      <% if current_user.mutual_friends(req.requester)  %>
+                        <span class="date">
+                          <%= current_user.mutual_friends(req.requester).length %>
+                          mutual friends
+                        </span>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="rfloat relative ">
+                    <div class="vertical_centre">
+                      <%= link_to "Accept?", user_friendships_path(req.requester),
+                          class: "button-request button-colors", method: :post,
+                            remote: true %>
+                      <%= link_to "Delete Request?", user_request_path(current_user,req.requester.id),
+                          method: :delete, class: "button-request", remote: true %>
+                    </div >
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% else %>
+        <i class="glyphicon glyphicon-user friend_requests_inactive"></i>
+      <% end %>
+        <div class="dropdown inline">
+          <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu" >
+            <li>
+              <%= link_to "Edit Profile", edit_users_path(current_user), method: :get,
+                    class: "button inline friend_request_header"  %>
+            </li>
+            <li>
+              <%= link_to "Signout", sessions_path(current_user),
+                  method: :delete, class: "button inline friend_request_header" %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</nav>
+</div>

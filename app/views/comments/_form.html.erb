@@ -3,10 +3,10 @@
   <div class="overflow">
     <%= f.label :body, class: "inline lfloat" do %>
       <%= image_tag current_user.picture.url(:comment),
-                      class: "inline comment_image  top" %>
+                      class: "inline comment_image top small_padding " %>
     <% end %>
-    <%= f.text_area :body, placeholder: "Write a comment...", size:"60x2",
-                                        class: "no_outline comment_body"  %>
+    <%= f.text_area :body, placeholder: "Write a comment...",
+                           class: "no_outline comment_body no_padding col-lg-11 col-md-10 col-sm-10 col-xs-8"  %>
   </div>
 
 <% end %>

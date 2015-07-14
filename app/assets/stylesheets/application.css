@@ -37,7 +37,7 @@
 .search_bar {
   color: black;
   border-radius: 3px;
-  width: 500px;
+  width: 400px;
   background-color: white;
 }
 
@@ -52,6 +52,10 @@
 
 .width92 {
   width: 92% !important;
+}
+
+.width100 {
+  width: 100% !important
 }
 
 .friend_requests_active {
@@ -113,7 +117,7 @@
   background-color: #f9f9f9;
   color: #4E5665;
   border: 1px solid rgba(0, 0, 0, 0.4);
-  padding
+  padding: 2px 4px 2px 4px;
 }
 
 .no_padding {
@@ -203,6 +207,9 @@
   height: 30px;
   z-index: 200;
   border-bottom: 1px solid #1B316A;
+  background-color: #3b5998;
+  color: white;
+  height: 45px;
 }
 
 .well {
@@ -210,6 +217,7 @@
   border: 1px solid #DFE0E4;
   margin-bottom: 15px;
   padding: 10px;
+  overflow: auto;
 }
 .post {
   background-color: white;
@@ -233,6 +241,8 @@
   margin-bottom: 15px;
 
 }
+
+
 
 .photo_top_half {
   padding: 10px;
@@ -272,7 +282,7 @@
 
 .comment_text {
   font-size: .9em;
-  width: auto;
+  /*width: auto;*/
   /*float: right;*/
   overflow:auto;
   padding-left: 5px;
@@ -282,6 +292,10 @@
 .comment_area {
   overflow: auto;
   padding: 5px 0 5px 0;
+}
+
+.comment_body {
+  margin: 0px !important;
 }
 
 .comment_image {
@@ -352,7 +366,7 @@
 }
 
 .height_50 {
-  height: 49px;
+  height: 45px;
 }
 
 .grey {
@@ -376,6 +390,8 @@
   float: right;
   right: 0px;
 }
+
+
 
 .vivid {
   background-color: white;
