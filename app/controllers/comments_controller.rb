@@ -13,15 +13,22 @@ class CommentsController < ApplicationController
   end
 
   def edit
-
+    @comment = current_user.comments.find params[:id]
+    @commentable = @comment.commentable
   end
 
   def update
-
+    @comment = current_user.comments.find params[:id]
+    if @comment.update comment_params
+      render
+    else
+      render {create_failure}
+    end
   end
 
   def destroy
-
+    @comment = current_user.comments.find params[:id]
+    @comment.destroy
   end
 
   private

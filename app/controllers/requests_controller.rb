@@ -12,9 +12,12 @@ class RequestsController < ApplicationController
 
   def destroy
     requester = User.find(params[:id])
+
+    @request = Request.where('requestee_id = ? AND requester_id = ?',
+                    current_user, requester).first
     Request.where('requestee_id = ? AND requester_id = ?',
                     current_user, requester).destroy_all
-    redirect_to current_user
+    render
   end
 
 end

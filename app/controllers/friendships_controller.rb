@@ -5,10 +5,11 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.new
     @friendship.friend = friend
     if @friendship.save
-      Request.find_request(friend, current_user).destroy_all
-      redirect_to root_path, notice: "New friend made"
+      @request = Request.find_request(friend, current_user).first
+      @request.destroy
+      render
     else
-      redirect_to users_path, alert: "Something went wrong"
+      render {create_failure}
     end
   end
 

@@ -1,1 +1,8 @@
-$("#<%= dom_id(@likeable) %>").replaceWith("<%= j render partial: @likeable %>")
+var div = ".<%= dom_id(@likeable, :feed) %>";
+$(div).replaceWith("<%= j render partial: @likeable %>");
+$(div).each(function(_,e){
+  if ($(e).parents(".modal-body-text").length) {
+    $(e).find("img.width100")[0].remove()
+    $(e).find('.new_comment').replaceWith("<%= j render 'comments/form_modal', commentable: @likeable  %>")
+  }
+});

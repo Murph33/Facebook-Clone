@@ -1,0 +1,13 @@
+<% @comment ||= Comment.new %>
+<% if commentable.class != Comment %>
+  <%= form_for [commentable, @comment], remote: true do |f| %>
+    <div class="overflow">
+      <%= f.label :body, class: "inline lfloat" do %>
+        <%= image_tag current_user.picture.url(:comment),
+                                           class: "inline comment_image  top" %>
+      <% end %>
+      <%= f.text_area :body, placeholder: "Write a comment...", size:"25x2",
+                                            class: "no_outline comment_body"  %>
+    </div>
+  <% end %>
+<% end %>

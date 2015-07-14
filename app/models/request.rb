@@ -5,8 +5,15 @@ class Request < ActiveRecord::Base
   validate :no_inverse
   validates :requester_id, presence: true
   validates :requestee_id, presence: true, uniqueness: {scope: :requester_id}
+  validate :no_duplicate
 
   private
+
+  def no_duplicate
+    if Friendship.friendship_exists?(requester_id, requestee_id).any?
+      errors.add(:requester_id, "Only one friendship between a pair")
+    end
+  end
 
   def self.find_request requester, requestee
     where("(requester_id = :requester_id  AND requestee_id = :requestee_id) OR

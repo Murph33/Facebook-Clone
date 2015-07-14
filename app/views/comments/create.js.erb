@@ -1,4 +1,21 @@
-var target = $('#<%= dom_id(@commentable, :comment_box) %>')
-target.append("<%= j render partial: @commentable.comments.last %>")
+var target = $('.<%= dom_id(@commentable, :comment_box) %>')
+
+target.each(function(_,e){
+  if ($(e).parents(".modal-body-text").length) {
+    $(e).append("<%= j render 'comments/comment_modal', comment: @commentable.comments.last %>")
+  } else {
+    $(e).append("<%= j render partial: @commentable.comments.last %>")
+  }
+});
+
 <% @comment = Comment.new %>
-target.parent().find('#new_comment').replaceWith("<%= j render 'comments/form', commentable: @commentable  %>")
+
+
+// Need to check context of the comment.  if in a modal-body-text want to replace with the modal form
+target.each(function(_,e){
+  if ($(e).parents(".modal-body-text").length) {
+    $(e).parent().find('.new_comment').replaceWith("<%= j render 'comments/form_modal', commentable: @commentable  %>")
+  } else {
+    $(e).parent().find('.new_comment').replaceWith("<%= j render 'comments/form', commentable: @commentable  %>")
+  }
+});

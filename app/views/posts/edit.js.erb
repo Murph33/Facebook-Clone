@@ -1,0 +1,5 @@
+var target = $('#<%= dom_id(@post, :body) %>')
+
+
+
+target.replaceWith("<%= j render 'posts/form', post: @post %>")

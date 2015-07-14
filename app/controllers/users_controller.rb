@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:id]
+    @user = current_user
   end
 
   def update
@@ -61,6 +61,12 @@ class UsersController < ApplicationController
 
   def friends
 
+  end
+
+  def search
+    @users = User.fuzzy_search({first_name: params[:search],
+                                last_name: params[:search]}, false)
+    render
   end
 
   private

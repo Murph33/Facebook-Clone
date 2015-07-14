@@ -1,0 +1,28 @@
+<% @users ||= users %>
+<% unless @users.empty? %>
+  <div class="padded" id="replaceable">
+
+  <% @users.each do |user| %>
+    <%= link_to user do %>
+      <div class="search_result">
+        <div class="inline">
+          <%= image_tag user.picture.url(:avatar) %>
+        </div>
+        <div class="inline">
+          <span class="bold"><%= user.full_name %></span>
+          <% if user.profile.residence %>
+            <div class="date">
+              <%= user.profile.residence %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  </div>
+
+<% else  %>
+  <div id="replaceable">
+
+  </div>
+<% end %>

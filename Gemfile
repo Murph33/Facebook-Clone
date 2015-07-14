@@ -20,6 +20,7 @@ gem "simple_form"
 gem 'carrierwave'
 gem "mini_magick"
 gem "quiet_assets"
+gem 'textacular'
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Capistrano for deployment
@@ -33,6 +34,5 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem "letter_opener"
   gem 'spring'
-  gem "faker"
   gem "rails-erd"
 end

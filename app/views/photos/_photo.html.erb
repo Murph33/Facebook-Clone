@@ -1,0 +1,58 @@
+<div class="photo <%= dom_id(photo, :feed) %>">
+  <div class="photo_top_half">
+    <%= link_to photo.user do %>
+      <%= image_tag photo.user.picture.url(:avatar), class: "inline clearfix" %>
+    <% end %>
+    <div class="inline">
+      <%= link_to photo.user.full_name, photo.user %> <br>
+      <span class="date"><%= formatted_date(photo.created_at) %></span>
+    </div>
+    <div class="small_padding_redux">
+      <%= photo.description %>
+      <%= image_tag photo.image.url(:timeline), class: "width100" %>
+    </div>
+
+    <% if photo.liking_users.include? current_user %>
+      <%= link_to "Unlike", like_path(photo.like_for(current_user)), method: :delete, remote: true %>
+    <% else %>
+      <%= link_to "Like", photo_likes_path(photo), method: :post, remote: true %>
+    <% end %>
+
+  </div>
+
+  <div class="photo_bottom_half">
+    <% if photo.likes.any? %>
+      <div class="like_box">
+        <% if photo.liking_users.include? current_user %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>
+          You like this.
+          <% if photo.liking_users.length > 2 %>
+            <%= photo.liking_users.length - 1 %> other people do too.
+          <% elsif photo.liking_users.length == 2 %>
+            <%= photo.liking_users.length - 1 %> other person does too.
+          <% end %>
+        <% else %>
+        <%= link_to "<i class='glyphicon glyphicon-thumbs-up'></i>".html_safe,
+                photo_likes_path(photo), method: :post, remote: true  %>
+          <% if photo.liking_users.length > 1 %>
+            <%= photo.liking_users.length %> people liked this.
+          <% elsif photo.liking_users.length == 1 %>
+            1 person liked this.
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <!-- <div class="comment_box" id="<%= dom_id(photo, :comment_box) %>"> -->
+    <div class="comment_box <%= dom_id(photo, :comment_box) %>">
+      <div class="comment_area">
+        <% photo.comments.order(:created_at).each do |comment| %>
+          <%= render partial: comment %>
+        <% end %>
+      </div>
+    </div>
+      <div>
+        <%= render "comments/form", commentable: photo %>
+      </div>
+  </div>
+
+</div>

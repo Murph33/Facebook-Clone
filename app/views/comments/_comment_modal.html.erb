@@ -2,7 +2,7 @@
   <%= link_to comment.user do %>
     <%= image_tag comment.user.picture.url(:comment), class: "inline comment_image  top" %>
   <% end %>
-  <div class="inline comment_text width92">
+  <div class="inline comment_text width85">
     <div>
       <%= link_to comment.user.full_name, comment.user %> <%= comment.body %>
     </div>
@@ -13,13 +13,9 @@
       <%= link_to "Like", comment_likes_path(comment), method: :post, remote: true %>
     <% end %>
     <% if comment.user == current_user %>
-    <%= link_to "Edit", edit_comment_path(comment, comment.commentable), remote: true %>
-    <%= link_to "Delete", comment_path(comment), method: :delete,
-                    remote: true, data: {confirm: "Confirm deletion"} %>
-    <% end %>
-    <% if comment.likes.any? %>
-      <i class="glyphicon glyphicon-thumbs-up"></i>
-      <%= comment.likes.length %>
+      <%= link_to "Edit", edit_comment_path(comment, comment.commentable), remote: true %>
+      <%= link_to "Delete", comment_path(comment), method: :delete,
+                      remote: true, data: {confirm: "Confirm deletion"} %>
     <% end %>
   </div>
 </div>

@@ -18,4 +18,23 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = current_user.sent_posts.find(params[:id])
+  end
+
+  def destroy
+    @post = current_user.sent_posts.find(params[:id])
+    @post.destroy
+  end
+
+  def update
+    post_params = params.require(:post).permit(:body)
+    @post = current_user.sent_posts.find(params[:id])
+
+    if @post.update post_params
+      render
+    else
+      render {update_failure}
+    end
+  end
 end

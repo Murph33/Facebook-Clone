@@ -97,9 +97,12 @@
     (friends + inverse_friends)
   end
 
+  def mutual_friends user
+    all_friends & user.all_friends
+  end
 
   def newsfeed
-    (received_posts + statuses).sort_by {|x| x.created_at}.reverse
+    (received_posts + statuses + photos).sort_by {|x| x.created_at}.reverse
   end
 
   def age
@@ -121,7 +124,7 @@
   end
 
   def on_create
-    Profile.create user_id: id
+    Profile.create user_id: id unless profile
     albums.create title: "Timeline Photos"
     albums.create title: "Profile Pictures"
   end

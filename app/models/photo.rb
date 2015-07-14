@@ -11,4 +11,9 @@ class Photo < ActiveRecord::Base
   # has_many :pastings, dependent: :destroy
   belongs_to :user
   belongs_to :album
+
+  def like_for user
+    likes.find_by_user_id user.id
+  end
+
 end

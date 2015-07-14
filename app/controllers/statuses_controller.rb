@@ -16,4 +16,24 @@ class StatusesController < ApplicationController
     end
   end
 
+  def edit
+    @status = current_user.statuses.find params[:id]
+    
+  end
+
+  def update
+    @status = current_user.statuses.find params[:id]
+    status_params = params.require(:status).permit(:body)
+    if @status.update status_params
+      render
+    else
+      render {update_failure}
+    end
+  end
+
+  def destroy
+    @status = current_user.statuses.find params[:id]
+    @status.destroy
+  end
+
 end

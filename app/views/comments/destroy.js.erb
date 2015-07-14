@@ -1,0 +1,5 @@
+target = $('.<%= dom_id(@comment, :feed) %>')
+
+target.each(function(_,e){
+  $(e).remove()
+});

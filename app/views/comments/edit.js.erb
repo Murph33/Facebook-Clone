@@ -1,0 +1,10 @@
+target = $('.<%= dom_id(@comment, :feed) %>')
+
+
+target.each(function(_,e){
+  if ($(e).parents(".modal-body-text").length) {
+    $(e).replaceWith("<%= j render 'comments/form_modal', commentable: @commentable  %>")
+  } else {
+    $(e).replaceWith("<%= j render 'comments/form', commentable: @commentable %>")
+  }
+});
