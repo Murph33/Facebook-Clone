@@ -2,9 +2,10 @@
 <% @user ||= @post.postee %>
 <%= form_for [@user, @post], remote: true do |f| %>
 <div class="well">
-  <div>
-    <div><%= f.text_area :body, size: "55x5", placeholder: "Write something...",
-          class: "borderless"%>
+  <div class="overflow">
+    <div>
+      <%= f.text_area :body, placeholder: "Write something...",
+          class: "borderless width100"%>
     </div>
   <%= f.submit "Post", class: "button-colors white" %>
   </div>

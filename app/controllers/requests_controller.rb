@@ -4,9 +4,9 @@ class RequestsController < ApplicationController
     request = current_user.active_requests.new
     request.requestee = User.find(params[:user_id])
     if request.save
-      redirect_to users_path, notice: "Friend request sent"
+      render
     else
-      redirect_to users_path, alert: "Friend request didn't go through"
+      render {create_failure}
     end
   end
 
