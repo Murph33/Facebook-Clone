@@ -37,7 +37,7 @@
 .search_bar {
   color: black;
   border-radius: 3px;
-  width: 500px;
+  width: 400px;
   background-color: white;
 }
 
@@ -207,6 +207,9 @@
   height: 30px;
   z-index: 200;
   border-bottom: 1px solid #1B316A;
+  background-color: #3b5998;
+  color: white;
+  height: 45px;
 }
 
 .well {
@@ -238,6 +241,8 @@
   margin-bottom: 15px;
 
 }
+
+
 
 .photo_top_half {
   padding: 10px;
@@ -361,7 +366,7 @@
 }
 
 .height_50 {
-  height: 49px;
+  height: 45px;
 }
 
 .grey {
@@ -385,6 +390,8 @@
   float: right;
   right: 0px;
 }
+
+
 
 .vivid {
   background-color: white;
