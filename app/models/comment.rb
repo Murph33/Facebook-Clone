@@ -7,6 +7,10 @@ class Comment < ActiveRecord::Base
   validates :body, presence: true
   validates :commentable_id, presence: true
 
+  def truncated
+    body[0..175]
+  end
+
   def like_for user
     likes.find_by_user_id user.id
   end

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :friendships
     resources :requests
     resources :posts
+    resources :profiles, only: [:edit, :update]
     resources :photos, only: [:create, :new, :destroy, :update, :index]
   end
 # resources :status, only: [:create, :edit, :update, :destroy]

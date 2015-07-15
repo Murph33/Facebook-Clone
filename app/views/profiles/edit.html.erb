@@ -1,0 +1,12 @@
+Placeholder page
+
+<%= simple_form_for [current_user, @profile] do |f| %>
+
+
+  <%= f.input :cover_photo %>
+  <%= f.input :birth_place %>
+  <%= f.input :residence %>
+  <%= f.input :phone %>
+  <!-- Add a label and explain the regex validation for phone -->
+  <%= f.submit %>
+<% end %>

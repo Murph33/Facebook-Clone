@@ -14,6 +14,10 @@ class PhotosController < ApplicationController
     photo_params = params.require(:photo).permit(:description, :image, :album_id)
     @photo = current_user.photos.new photo_params
     @photo.album ||= Album.create user_id:current_user.id, title: "Untitled Album"
+    if @photo.album.title == "Profile Pictures"
+      current_user.update(picture: photo_params[:image])
+      current_user.save
+    end
     if @photo.save
       render
     else

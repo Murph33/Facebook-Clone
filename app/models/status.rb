@@ -6,6 +6,10 @@ class Status < ActiveRecord::Base
   has_many :liking_users, through: :likes, source: :user
   belongs_to :user
 
+  def truncated
+    body[0..250]
+  end
+
   def display
     "#{user.full_name}: #{body} #{created_at}"
   end

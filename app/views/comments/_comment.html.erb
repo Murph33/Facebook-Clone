@@ -3,10 +3,18 @@
     <%= image_tag comment.user.picture.url(:comment), class: "inline comment_image  top" %>
   <% end %>
   </div>
-  <!-- <div class="inline comment_text width92"> -->
   <div class="inline no_padding comment_text col-lg-11 col-md-11 col-sm-10 col-xs-8">
     <div>
-      <%= link_to comment.user.full_name, comment.user %> <%= comment.body %>
+      <%= link_to comment.user.full_name, comment.user %>
+      <span class="truncated_text">
+        <%= comment.truncated.strip %>
+      </span>
+      <% unless comment.truncated == comment.body %>
+
+        <div class="inline see_more" text="<%= comment.body %>">
+        ... See more
+        </div>
+      <% end %>
     </div>
     <% if comment.liking_users.include?(current_user) %>
       <%= link_to "Unlike", like_path(comment.like_for(current_user)),

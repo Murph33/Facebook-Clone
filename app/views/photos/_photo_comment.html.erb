@@ -8,7 +8,16 @@
       <span class="date"><%= formatted_date(photo.created_at) %></span>
     </div>
     <div>
-      <%= photo.description %>
+      <span class="truncated_text">
+        <%= photo.truncated.strip %>
+      </span>
+      <% unless photo.truncated == photo.description %>
+
+        <div class="inline see_more" text="<%= photo.description %>">
+        ... See more
+        </div>
+      <% end %>
+      <div class="btn">button tag.  THIS NEEDS ALL THE FUNCTIONALITY STILL</div>
     </div>
     <% if photo.liking_users.include? current_user %>
       <%= link_to "Unlike", like_path(photo.like_for(current_user)), method: :delete, remote: true %>

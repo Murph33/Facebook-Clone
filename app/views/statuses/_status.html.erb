@@ -10,7 +10,15 @@
         <span class="date"><%= formatted_date(status.created_at) %></span>
       </div>
       <div class="status_body" id="<%= dom_id(status, :body) %>">
-        <%= status.body %>
+        <span class="truncated_text">
+          <%= status.truncated.strip %>
+        </span>
+        <% unless status.truncated == status.body %>
+
+          <div class="inline see_more" text="<%= status.body %>">
+          ... See more
+          </div>
+        <% end %>
       </div>
       <div>
         <% if status.liking_users.include? current_user %>

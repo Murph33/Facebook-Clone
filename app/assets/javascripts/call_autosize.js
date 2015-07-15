@@ -49,9 +49,8 @@ $(document).ready(function(){
     },0)
   });
 
-  
-
-
-
-
+  $(document).on('mousedown', ".see_more", function() {
+    $(this).siblings('.truncated_text').html($(this).attr('text'))
+    $(this).remove()
+  });
 });

@@ -10,7 +10,15 @@
         <span class="date"><%= formatted_date(post.created_at) %></span>
       </div>
       <div id="<%= dom_id(post, :body) %>">
-        <%= post.body %>
+        <span class="truncated_text">
+          <%= post.truncated.strip %>
+        </span>
+        <% unless post.truncated == post.body %>
+
+          <div class="inline see_more" text="<%= post.body %>">
+          ... See more
+          </div>
+        <% end %>
       </div>
     </div>
 

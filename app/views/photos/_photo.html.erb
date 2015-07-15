@@ -8,18 +8,39 @@
       <span class="date"><%= formatted_date(photo.created_at) %></span>
     </div>
     <div class="small_padding_redux">
-      <%= photo.description %>
-      <%= image_tag photo.image.url(:timeline), class: "width100" %>
-    </div>
+      <span class="truncated_text">
+        <%= photo.truncated.strip %>
+      </span>
+      <% unless photo.truncated == photo.description %>
 
+        <div class="inline see_more" text="<%= photo.description %>">
+        ... See more
+        </div>
+      <% end %>
+      <div class="btn">button tag.  THIS NEEDS ALL THE FUNCTIONALITY STILL</div>
+      <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
+        <%= image_tag photo.image.url(:timeline), class: "width100" %>
+      </button>
+      <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-body inline width75">
+              <%= image_tag photo.image.url, class: "width100 inline" %>
+            </div>
+            <div class="modal-body-text">
+
+              <%= render "photos/photo_comment", photo: photo %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <% if photo.liking_users.include? current_user %>
       <%= link_to "Unlike", like_path(photo.like_for(current_user)), method: :delete, remote: true %>
     <% else %>
       <%= link_to "Like", photo_likes_path(photo), method: :post, remote: true %>
     <% end %>
-
   </div>
-
   <div class="photo_bottom_half">
     <% if photo.likes.any? %>
       <div class="like_box">
@@ -42,7 +63,6 @@
         <% end %>
       </div>
     <% end %>
-    <!-- <div class="comment_box" id="<%= dom_id(photo, :comment_box) %>"> -->
     <div class="comment_box <%= dom_id(photo, :comment_box) %>">
       <div class="comment_area">
         <% photo.comments.order(:created_at).each do |comment| %>
@@ -54,5 +74,4 @@
         <%= render "comments/form", commentable: photo %>
       </div>
   </div>
-
 </div>

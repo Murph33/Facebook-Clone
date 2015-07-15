@@ -1,11 +1,9 @@
 <div class="col-lg-11 col-md-11 col-sm-11 show_header">
   <div id="cover_photo_area">
-    <% if @user.profile.cover_photo %>
-      <%= @user.profile.cover_photo %>
+    <% if @user.profile.cover_photo.url(:cover_photo) %>
+      <%= image_tag @user.profile.cover_photo.url(:cover_photo) %>
     <% else %>
-      <div class="default_cover_photo_area">
-
-      </div>
+      <div class="default_cover_photo_area"></div>
     <% end %>
     <%= image_tag @user.picture.url(:large), id: "cover_photo_user"  %>
     <div id="cover_photo_text">
@@ -57,7 +55,6 @@
           <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(@photos[i]) %>">
             <%= image_tag @photos[i].image.url(:square) %>
           </button>
-
           <div class="modal fade" id="<%= dom_id(@photos[i]) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">

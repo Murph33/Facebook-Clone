@@ -4,7 +4,16 @@
   <% end %>
   <div class="inline comment_text width85">
     <div>
-      <%= link_to comment.user.full_name, comment.user %> <%= comment.body %>
+      <%= link_to comment.user.full_name, comment.user %>
+      <span class="truncated_text">
+        <%= comment.truncated.strip %>
+      </span>
+      <% unless comment.truncated == comment.body %>
+
+        <div class="inline see_more" text="<%= comment.body %>">
+        ... See more
+        </div>
+      <% end %>
     </div>
     <% if comment.liking_users.include?(current_user) %>
       <%= link_to "Unlike", like_path(comment.like_for(current_user)),

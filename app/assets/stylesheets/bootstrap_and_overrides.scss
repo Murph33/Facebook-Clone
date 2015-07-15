@@ -1,2 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.see_more {
+  color: #3B5998;
+  &:hover{
+    cursor:   pointer;
+  }
+}

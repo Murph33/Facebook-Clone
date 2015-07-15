@@ -12,6 +12,12 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   belongs_to :album
 
+  has_many :tagged_users, through: :taggings, source: :user
+
+  def truncated
+    description[0..250]
+  end
+
   def like_for user
     likes.find_by_user_id user.id
   end

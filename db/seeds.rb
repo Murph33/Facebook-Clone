@@ -13,6 +13,18 @@
               password: "123",
               password_confirmation: "123",
               gender: "Male",
-              remote_picture_url: Faker::Avatar.image,
+              remote_picture_url: "http://lorempixel.com/600/400/cats/",
               email: "#{i}@#{i}.com")
+end
+
+Profile.where(cover_photo: nil).each {|p| p.update(remote_cover_photo_url: "http:/lorempixel.com/850/315/nightlife/")}
+User.all.each {|u| u.profile.update(remote_cover_photo_url: "http:/lorempixel.com/850/315/nightlife/")}
+Profile.where(cover_photo: nil).each {|p| p.update(cover_photo: "http:/lorempixel.com/850/315/nightlife/"); p.save }
+u.profile.update(remote_cover_photo_url: "http://lorempixel.com/850/315/nightlife/")
+
+User.all.each do |u|
+  10.times do |i|
+    Photo.create(user: u,
+                 remote_image_url: "http://lorempixel.com/640/480/abstract")
+  end
 end

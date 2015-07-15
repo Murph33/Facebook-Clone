@@ -32,6 +32,8 @@
 
   has_many :albums, dependent: :destroy
 
+  has_many :tagged_photos, through: :taggings, source: :photo
+
   has_many :likes, dependent: :destroy
   has_many :liked_photos, through: :likes, source: :likeable, source_type: :Photo
   has_many :liked_statuses, through: :likes, source: :likeable, source_type: :Status

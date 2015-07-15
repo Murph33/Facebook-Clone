@@ -11,7 +11,9 @@ class Post < ActiveRecord::Base
   belongs_to :poster, class_name: "User"
   belongs_to :postee, class_name: "User"
 
-
+  def truncated
+    body[0..250]
+  end
 
   def like_for user
     likes.find_by_user_id user.id
