@@ -25,7 +25,19 @@
    position: relative;
  }
 
+.proper_size {
+  width: 206px;
+  height: 206px;
+  position: relative;
+}
 
+.album_photos_toggle  {
+  display: inline;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  transition: all 0.4s;
+}
 
  .highlight {
    background-color: #FFF9D7 !important;

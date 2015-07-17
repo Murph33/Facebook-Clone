@@ -87,8 +87,17 @@
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane" id="Albums">
-      <% @user.albums.each do |album| %>
-
+      <% @albums.each do |album| %>
+        <div class='inline' data-img-list="<%= album.recent_five.map {|img| dom_id(img, :album) }.join(",") %>">
+          <button type="button" class="no_padding proper_size">
+            <% album.recent_five.each do |photo| %>
+              <%= image_tag photo.image.url(:album), class:"album_photos_toggle", id:"#{dom_id(photo, :album)}"%>
+            <% end %>
+          </button>
+          <div>
+            <%= album.title %>
+          </div>
+        </div>
       <% end %>
     </div>
     <div role="tabpanel" class="tab-pane" id="settings">settings</div>
