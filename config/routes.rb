@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "/users/:id/friends" => "users#friends", as: "users_friends"
   get "/users/search" => "users#search", as: "users_search"
+  get "/users/tagging_friends_search" => "users#tagging_friends_search", as: "tagging_friends_search"
+  get "/users/activate" => "users#activate", as: "users_activate"
 
   resources :likes, only: [:destroy]
   resources :users, except: [:edit] do
@@ -15,7 +17,9 @@ Rails.application.routes.draw do
     resources :requests
     resources :posts
     resources :profiles, only: [:edit, :update]
-    resources :photos, only: [:create, :new, :destroy, :update, :index]
+    resources :albums, only: [:new, :create, :destroy]
+    resources :photos, only: [:create, :new, :destroy, :update, :index,]
+    get "/photos_of" => "photos#photos_of", as: "photos_of"
   end
 # resources :status, only: [:create, :edit, :update, :destroy]
   resources :posts, only: [] do
@@ -40,4 +44,5 @@ Rails.application.routes.draw do
     resources :replies
   end
 
+  resources :taggings, only: [:create, :destroy]
 end

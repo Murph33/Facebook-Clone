@@ -1,5 +1,7 @@
 class StatusesController < ApplicationController
-
+  before_action :verify_account!
+  before_action :authenticate_user!
+  
   def create
     status_params = params.require(:status).permit(:body)
     @status = Status.new status_params
@@ -18,7 +20,7 @@ class StatusesController < ApplicationController
 
   def edit
     @status = current_user.statuses.find params[:id]
-    
+
   end
 
   def update

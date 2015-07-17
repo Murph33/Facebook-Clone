@@ -53,4 +53,39 @@ $(document).ready(function(){
     $(this).siblings('.truncated_text').html($(this).attr('text'))
     $(this).remove()
   });
+
+  var tagging_field = "<input type='text' id='tagging_field' style='width: 92%; outline: none; margin: 4px 0 4px 0;' placeholder='Tag a friend!' style='display: inline-block;'>"
+
+  $(document).on('mousedown', '.tag_photo', function(){
+    $(this).parent().append(tagging_field)
+    $(this).siblings('.tagged_users').removeClass('hidden')
+    $(this).html('Finish Tagging').removeClass('tag_photo').addClass('finish_tagging')
+  });
+
+  $(document).on('mousedown', '.finish_tagging', function(){
+    $(this).siblings('#tagging_field').remove()
+    $(this).siblings('.tagged_users').addClass('hidden')
+    $(this).siblings('.tag_placeholder').html('')
+    $(this).html('Tag Photo').addClass('tag_photo').removeClass('finish_tagging')
+  });
+
+  var tag = $('[id="tagging_field"]');
+  var lastGoodTagVal;
+  $(document).on('keyup', '[id="tagging_field"]', _.debounce(function (e) {
+    var tagValue = $(e.target).val();
+    var photo_id = $(e.target).parents('.photo_id_div').attr('photo_id')
+    if (tagValue !== lastGoodTagVal) {
+      lastGoodTagVal = tagValue;
+      $.get("/users/tagging_friends_search", {search: tagValue, photo_id: photo_id});
+    }
+  }, 250));
+
+  $(document).on('mousedown', '.tagging_search_result', function() {
+    var user = $(this).attr('user_id');
+    var photo = $(this).parents('.photo_id_div').attr('photo_id');
+    $.post('/taggings/', {tagging: {user_id: user, photo_id: photo}});
+    $(this).remove()
+  });
+
+
 });

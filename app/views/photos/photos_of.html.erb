@@ -1,0 +1,97 @@
+<div class="col-lg-11 col-md-11 col-sm-11 show_header">
+  <div id="cover_photo_area">
+    <% if @user.profile.cover_photo.url(:cover_photo) %>
+      <%= image_tag @user.profile.cover_photo.url(:cover_photo) %>
+    <% else %>
+      <div class="default_cover_photo_area"></div>
+    <% end %>
+    <%= image_tag @user.picture.url(:large), id: "cover_photo_user"  %>
+    <div id="cover_photo_text">
+      <%= @user.full_name %>
+    </div>
+    <% if current_user != @user && !(current_user.all_friends.include? @user) &&
+                                  (!current_user.requestees.include? @user) %>
+      <%= form_for [@user, @request], id:"friend_request_button", remote: true do |f| %>
+      <div class="add_friend_button  background_grey inline">
+        <%= f.submit "Add Friend", class: "background_grey borderless" %>
+      </div>
+      <% end %>
+    <% elsif current_user.requestees.include? @user %>
+    <div class="add_friend_button  background_grey inline">Friend Request Sent</div>
+    <% end %>
+    <div class="space_holder"></div>
+  </div>
+</div>
+
+
+<div class="col-lg-11">
+<div style="height: 15px;"></div>
+<div class="photo_header col-lg-12 col-md-12 col-sm-12 grey" style="height: 40px; color: black;"> Photos</div>
+
+  <ul class="nav nav-tabs photo_header" role="tablist">
+    <li role="presentation"class="active photo_header_area" ><a href="#Photos_of_You" aria-controls="Photos_of_You" role="tab" data-toggle="tab">Photos of You</a></li>
+    <li role="presentation" class="photo_header_area"><a href="#Your_Photos" aria-controls="Your_Photos" role="tab" data-toggle="tab">Your Photos</a></li>
+    <li role="presentation" class="photo_header_area"><a href="#Albums" aria-controls="Albums" role="tab" data-toggle="tab">Albums</a></li>
+    <li role="presentation" class="photo_header_area"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="Photos_of_You">
+      <% @photos_of_user.each_with_index do |photo, i| %>
+
+        <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
+          <%= image_tag photo.image.url(:album), class: "width100" %>
+        </button>
+        <% if i % 3 == 0 %>
+          <div class="col-lg-12 col-md-12 col-sm-12 grey" style="height: 3px"></div>
+        <% end %>
+        <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-body inline width75">
+                <%= image_tag photo.image.url, class: "width100 inline" %>
+              </div>
+              <div class="modal-body-text">
+
+                <%= render "photos/photo_comment", photo: photo %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="Your_Photos">
+      <% @user.photos.reverse.each_with_index do |photo, i| %>
+
+        <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
+          <%= image_tag photo.image.url(:album), class: "width100" %>
+        </button>
+        <% if i % 3 == 0 %>
+          <div class="col-lg-12 col-md-12 col-sm-12 grey" style="height: 3px"></div>
+        <% end %>
+        <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-body inline width75">
+                <%= image_tag photo.image.url, class: "width100 inline" %>
+              </div>
+              <div class="modal-body-text">
+
+                <%= render "photos/photo_comment", photo: photo %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="Albums">
+      <% @user.albums.each do |album| %>
+
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="settings">settings</div>
+  </div>
+
+</div>

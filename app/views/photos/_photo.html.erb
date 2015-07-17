@@ -8,16 +8,16 @@
       <span class="date"><%= formatted_date(photo.created_at) %></span>
     </div>
     <div class="small_padding_redux">
-      <span class="truncated_text">
-        <%= photo.truncated.strip %>
-      </span>
-      <% unless photo.truncated == photo.description %>
-
-        <div class="inline see_more" text="<%= photo.description %>">
-        ... See more
-        </div>
+      <% if photo.truncated %>
+        <span class="truncated_text">
+          <%= photo.truncated.strip %>
+        </span>
+        <% unless photo.truncated == photo.description %>
+          <div class="inline see_more" text="<%= photo.description %>">
+          ... See more
+          </div>
+        <% end %>
       <% end %>
-      <div class="btn">button tag.  THIS NEEDS ALL THE FUNCTIONALITY STILL</div>
       <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
         <%= image_tag photo.image.url(:timeline), class: "width100" %>
       </button>
@@ -70,8 +70,10 @@
         <% end %>
       </div>
     </div>
-      <div>
-        <%= render "comments/form", commentable: photo %>
-      </div>
+      <% if (photo.user.all_friends.include? current_user) || (photo.user == current_user) %>
+        <div>
+          <%= render "comments/form", commentable: photo %>
+        </div>
+      <% end %>
   </div>
 </div>

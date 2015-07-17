@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.1'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -15,12 +14,14 @@ gem 'delayed_job_active_record'
 gem "delayed_job_web"
 gem 'bootstrap-sass'
 gem 'cancancan'
+gem 'has_secure_token'
 gem 'friendly_id'
 gem "simple_form"
 gem 'carrierwave'
 gem "mini_magick"
 gem "quiet_assets"
 gem 'textacular'
+gem 'cocoon'
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Capistrano for deployment

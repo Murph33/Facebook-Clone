@@ -24,10 +24,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  process resize_to_fit: [1200, 1200]
+  process resize_to_fit: [1000, 1000]
 
   version :square do
     process resize_to_fill: [103, 103]
+  end
+
+  version :album do
+    process resize_to_fill: [206, 206]
   end
 
   version :timeline do

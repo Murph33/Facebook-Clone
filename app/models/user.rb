@@ -15,7 +15,9 @@
 ##  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id",
 #              dependent: :destroy
 
-  after_create :on_create
+
+  has_secure_token
+  has_secure_password
 
   has_one :profile, dependent: :destroy
   mount_uploader :picture, ProfilePictureUploader
@@ -33,6 +35,7 @@
   has_many :albums, dependent: :destroy
 
   has_many :tagged_photos, through: :taggings, source: :photo
+  has_many :taggings, dependent: :destroy
 
   has_many :likes, dependent: :destroy
   has_many :liked_photos, through: :likes, source: :likeable, source_type: :Photo
@@ -64,7 +67,7 @@
   #
   # has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   # has_many :followers, through: :active_relationships,
-  has_secure_password
+
   has_many :statuses, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :photos, dependent: :destroy
@@ -83,12 +86,15 @@
   # has_many :inverse_friendships, class_name: :friendship, foreign_key: :friend_id
   # has_many :inverse_friends, through: :inverse_friendships, source: :user
 
+  after_create :on_create
+  after_initialize :inactive
+  after_save :unique_token
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: :true, uniqueness: true,
             format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :birth_date, presence: true
-  validate :validate_gender
+  # validate :validate_gender
   validate :age
 
   def give_genders
@@ -107,14 +113,6 @@
     (received_posts + statuses + photos).sort_by {|x| x.created_at}.reverse
   end
 
-  def age
-    unless birth_date > (Date.today - 115.years)
-      errors.add(:birth_date, "you aren't that old")
-    end
-    if birth_date > (Date.today - 13.years)
-      errors.add(:birth_date, "must be 13 or older")
-    end
-  end
   def validate_gender
     unless POSSIBLE_GENDERS.include? gender
       errors.add(:gender, "Use a radio button")
@@ -125,10 +123,35 @@
     "#{first_name} #{last_name}".strip.squeeze(" ")
   end
 
+  def tagged_photo photo
+    taggings.find_by_photo_id(photo.id)
+  end
+
+  private
+
+  def age
+    unless birth_date > (Date.today - 115.years)
+      errors.add(:birth_date, "you aren't that old")
+    end
+    if birth_date > (Date.today - 13.years)
+      errors.add(:birth_date, "must be 13 or older")
+    end
+  end
+
   def on_create
     Profile.create user_id: id unless profile
     albums.create title: "Timeline Photos"
     albums.create title: "Profile Pictures"
+  end
+
+  def inactive
+    self.active ||= false
+  end
+
+  def unique_token
+    users = User.where("token = ?", token)
+    regenerate_token unless users.length == 1
+    unique_token unless users.length == 1
   end
 
   # def liked_posts

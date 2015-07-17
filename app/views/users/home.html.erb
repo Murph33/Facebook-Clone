@@ -3,7 +3,7 @@
 <h3>Sign up for Fakebook!</h3>
   <%= render 'form' %>
 <% end %>
-<% if @current_user %>
+<% if current_user && current_user.active == true %>
   <div class="col-lg-2 col-md-2 col-sm-2"></div>
   <div class="col-lg-7 col-md-9 col-sm-11">
 
@@ -17,4 +17,12 @@
       <% end %>
     </div>
   </div>
+<% elsif current_user %>
+<br><br>
+
+<h3>Please activate your account</h3>
+<p>
+  An email should arrive shortly with a link you can follow.
+</p>
+
 <% end %>

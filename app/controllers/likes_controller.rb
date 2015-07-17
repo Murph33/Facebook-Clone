@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
 
+  before_action :verify_account!
   before_action :authenticate_user!
   before_action :find_likeable
 
@@ -14,6 +15,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
+
     @like = current_user.likes.find params[:id]
     @likeable = @like.likeable
 

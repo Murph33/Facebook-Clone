@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!, except: [:home, :new, :create]
+  before_action :authenticate_user!, except: [:home, :new, :create, :activate]
+  before_action :verify_account!, except: [:home, :activate, :create]
 
   def index
     @users = User.all
@@ -19,10 +20,10 @@ class UsersController < ApplicationController
   end
 
   def create
-
     @user = User.new user_params
     @user.profile = Profile.new
     if @user.save
+      UserMailer.notify_new_user(@user).deliver_now
       session[:user_id] = @user.id
       redirect_to @user, notice: "Welcome to Fakebook"
     else
@@ -70,6 +71,24 @@ class UsersController < ApplicationController
     render
   end
 
+  def activate
+    user = User.find_by_token params[:token]
+    user.update(active:true)
+    redirect_to root_path, notice: "Thanks for activating your account.  Enjoy your experience"
+  end
+
+  def tagging_friends_search
+    friends = current_user.friends.fuzzy_search({first_name: params[:search],
+                                            last_name: params[:search]}, false)
+    inverse_friends = current_user.inverse_friends.fuzzy_search({first_name: params[:search],
+                                            last_name: params[:search]}, false)
+    photo = Photo.find params[:photo_id]
+    if current_user.first_name.downcase[0..2] == params[:search].downcase[0..2] ||
+         current_user.last_name.downcase[0..2] == params[:search].downcase[0..2]
+      friends += [current_user]
+    end
+    @all_friends = friends + inverse_friends - photo.tagged_users
+  end
   private
 
   def user_params

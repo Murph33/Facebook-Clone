@@ -1,11 +1,20 @@
 var div = ".<%= dom_id(@likeable, :feed) %>";
+// Make an object with functions to call in the if/else to improve
+// readability.
 
-$(div).replaceWith("<%= j render partial: @likeable %>");
-// Need to check context of the like.  if in a modal-body-text want to replace with the modal form and remove the image
 $(div).each(function(_,e){
-  if ($(e).parent(".modal-body-text").length) {
-    $(e).find("img.width100")[0].remove()
-    $(e).find('.new_comment').replaceWith("<%= j render 'comments/form_modal', commentable: @likeable  %>")
-
+  if ($(e).parents(".modal-body-text").length) {
+    if (<%= @likeable.class == Comment %>) {
+      $(e).replaceWith("<%= j render '/comments/comment_modal', comment: @likeable %>");
+    } else {
+      $(e).replaceWith("<%= j render 'photos/photo_comment', photo: @likeable %>");
+    }
+  } else {
+    $(e).replaceWith("<%= j render partial: @likeable %>");
   }
 });
+setTimeout(function(){
+  $('.modal-body-text').hide(0, function() { $('.modal-body-text').show() });
+  console.log("ran set timeout")
+},10);
+// Need to check context of the like.  if in a modal-body-text want to replace with the modal form and remove the image

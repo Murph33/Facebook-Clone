@@ -1,0 +1,3 @@
+<div class="tagged_user" id="<%= dom_id(@tag) %>">
+  <%= @tag.user.full_name %> <%= link_to "X", @tag, method: :delete, remote: true %>
+</div>

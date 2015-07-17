@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-
+  before_action :verify_account!
+  before_action :authenticate_user!
   def create
     post_params = params.require(:post).permit(:body)
     @post = current_user.sent_posts.new post_params

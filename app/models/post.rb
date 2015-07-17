@@ -8,8 +8,12 @@ class Post < ActiveRecord::Base
   # has_many :replies, dependent: :destroy, as: :replyable
   # has_many :replying_users, through: :replies, source: :user
 
+  validates :body, presence: true
+  validate :friends
+
   belongs_to :poster, class_name: "User"
   belongs_to :postee, class_name: "User"
+
 
   def truncated
     body[0..250]
@@ -22,4 +26,13 @@ class Post < ActiveRecord::Base
   def display
     "#{poster.full_name} -> #{postee.full_name}: #{body} #{created_at}"
   end
+
+private
+
+  def friends
+    unless postee.all_friends.include? poster
+      errors.add(:poster_id, "Only post on your friends walls")
+    end
+  end
+
 end

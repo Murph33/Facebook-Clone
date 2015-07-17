@@ -11,6 +11,18 @@ class Comment < ActiveRecord::Base
     body[0..175]
   end
 
+  def description
+    body
+  end
+
+  def tagged_users
+    nil
+  end
+
+  def comments
+    Comment.all
+  end
+
   def like_for user
     likes.find_by_user_id user.id
   end

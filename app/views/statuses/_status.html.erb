@@ -66,8 +66,10 @@
         <% end %>
       </div>
     </div>
-      <div>
-        <%= render "comments/form", commentable: status %>
-      </div>
+      <% if status.user.all_friends.include? current_user %>
+        <div>
+          <%= render "comments/form", commentable: status %>
+        </div>
+      <% end %>
   </div>
 </div>

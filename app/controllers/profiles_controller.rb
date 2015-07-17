@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :verify_account!
   before_action :authenticate_user!
 
   def edit

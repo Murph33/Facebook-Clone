@@ -7,3 +7,51 @@
     cursor:   pointer;
   }
 }
+.tag_photo {
+  background-color: #FDFDFD;
+  color: #4e5665;
+  border: 1px solid #CCCCCC;
+  display: inline-block;
+  padding: 3px 5px 3px 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.finish_tagging {
+  background-color: #FDFDFD;
+  color: #4e5665;
+  border: 1px solid #CCCCCC;
+  display: inline-block;
+  padding: 3px 5px 3px 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none
+}
+
+.tagging_search_result {
+  background-color: white;
+  color: black;
+  text-decoration: none !important;
+  &:hover {
+    background-color: #627AAD;
+    cursor: pointer;
+  }
+}
+
+.tagged_users {
+  display: hidden;
+}
+
+.tagged_user {
+  background-color: #E9EAED;
+  border: 1px solid #9daccb;
+  padding: 2px 2px 0px 2px;
+  margin: 0px;
+  display: inline-block;
+}

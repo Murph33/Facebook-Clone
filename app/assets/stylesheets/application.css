@@ -16,9 +16,15 @@
  /** {
    border: 1px dashed black;
  }*/
+
+ html, body {
+ box-sizing: border-box;
+}
+
  .relative {
    position: relative;
  }
+
 
 
  .highlight {
@@ -96,7 +102,7 @@
    border: 4px white solid;
    position: absolute;
    z-index: 9;
-   bottom: 0px;
+   bottom: 8px;
    left: 30px;
    background-color: grey;
  }
@@ -165,6 +171,9 @@
    width: 850px;
    height: 30px;
    background-color: white;
+   border-bottom: 1px solid #D3D6DB;
+   border-left: 1px solid #D3D6DB;
+   border-right: 1px solid #D3D6DB;
  }
 
  .small_padding {
@@ -353,6 +362,12 @@
    overflow-y: auto;
  }
 
+.tagging_field {
+  outline: none;
+  margin: 4px 0 4px 0;
+}
+
+
  .push_bot {
    padding-top: 15px;
    padding-bottom: 10px;
@@ -409,6 +424,10 @@
    text-decoration: none !important;
  }
 
+.even_padding {
+  padding: 4px;
+}
+
  #replaceable {
    border-radius: 5px;
    background-color: white
@@ -464,6 +483,15 @@
 
  }
 
+.photo_header {
+  background-color: #F6F7F8;
+  border-left: 1px solid #D3D6DB;
+  border-right: 1px solid #D3D6DB;
+}
+
+.photo_header_area {
+  background-color: #F6F7F8;
+}
  #photo_header_text {
    position: absolute;
    left: 15px;

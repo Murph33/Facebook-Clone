@@ -1,0 +1,18 @@
+<% @all_friends||= all_friends %>
+<% unless @all_friends.empty? %>
+  <div class="padded tag_placeholder" id="">
+  <% @all_friends.each do |user| %>
+      <div user_id="<%= user.id %>" class="tagging_search_result">
+        <div class="inline">
+          <%= image_tag user.picture.url(:comment), class: "even_padding" %>
+        </div>
+        <div class="inline">
+          <span class="bold"><%= user.full_name %></span>
+        </div>
+      </div>
+  <% end %>
+  </div>
+<% else  %>
+  <div class="tag_placeholder">
+  </div>
+<% end %>

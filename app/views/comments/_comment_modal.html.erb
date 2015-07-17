@@ -2,11 +2,13 @@
   <%= link_to comment.user do %>
     <%= image_tag comment.user.picture.url(:comment), class: "inline comment_image  top" %>
   <% end %>
-  <div class="inline comment_text width85">
+  <div class="inline comment_text width85"> <span class="hi there"></span>
     <div>
       <%= link_to comment.user.full_name, comment.user %>
       <span class="truncated_text">
-        <%= comment.truncated.strip %>
+        <% if comment.truncated %>
+          <%= comment.truncated.strip %>
+        <% end %>
       </span>
       <% unless comment.truncated == comment.body %>
 
@@ -25,6 +27,10 @@
       <%= link_to "Edit", edit_comment_path(comment, comment.commentable), remote: true %>
       <%= link_to "Delete", comment_path(comment), method: :delete,
                       remote: true, data: {confirm: "Confirm deletion"} %>
+    <% end %>
+    <% if comment.likes.any? %>
+      <i class="glyphicon glyphicon-thumbs-up"></i>
+      <%= comment.likes.length %>
     <% end %>
   </div>
 </div>

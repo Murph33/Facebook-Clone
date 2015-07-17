@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  before_action :verify_account!
   before_action :authenticate_user!
 
   def index
@@ -29,6 +30,11 @@ class PhotosController < ApplicationController
 
   end
 
-
+  def photos_of
+    @user           = User.find(params[:user_id])
+    @photos_of_user = @user.tagged_photos.order("created_at desc")
+    @album = Album.new
+    1.times { @album.photos.build }
+  end
 
 end

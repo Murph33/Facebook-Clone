@@ -62,8 +62,10 @@
         <% end %>
       </div>
     </div>
-      <div>
-        <%= render "comments/form", commentable: post %>
-      </div>
+      <% if post.postee.all_friends.include? current_user %>
+        <div>
+          <%= render "comments/form", commentable: post %>
+        </div>
+      <% end %>
   </div>
 </div>

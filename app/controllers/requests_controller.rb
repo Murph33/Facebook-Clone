@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
-
+  before_action :verify_account!
+  before_action :authenticate_user!
   def create
     request = current_user.active_requests.new
     request.requestee = User.find(params[:user_id])

@@ -13,9 +13,18 @@ class Photo < ActiveRecord::Base
   belongs_to :album
 
   has_many :tagged_users, through: :taggings, source: :user
-
+  has_many :taggings, dependent: :destroy
+  
   def truncated
-    description[0..250]
+    description[0..250] if description
+  end
+
+  def body
+    description
+  end
+
+  def commentable
+
   end
 
   def like_for user
