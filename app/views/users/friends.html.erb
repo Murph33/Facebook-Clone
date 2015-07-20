@@ -1,0 +1,26 @@
+<%= render "photos/cover_photo_area" %>
+
+<div class="col-lg-11 relative">
+  <div style="height: 15px;"></div>
+  <div class="photo_header col-lg-12 col-md-12 col-sm-12 grey" style="height: 40px; color: black;">
+    <h4><%= @user.full_name %>'s Friends</h4>
+
+  </div>
+
+  <% @friends.each do |friend| %>
+    <div class='inline album' >
+      <%= link_to friend, class:"proper_size" do %>
+
+        <%= image_tag friend.picture.url(:large), class:"proper_size " %>
+        <%= friend.full_name %>
+
+      <% end %>
+      <div class="album_footer">
+        <span class="truncated_text">
+
+        </span>
+        <div class="date"></div>
+      </div>
+    </div>
+  <% end %>
+</div>

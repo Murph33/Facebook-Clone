@@ -32,7 +32,12 @@ class PhotosController < ApplicationController
 
   def update
     @photo = current_user.photos.find(params[:id])
+    @photo.album.touch
     if @photo.update(photo_params)
+      if @photo.album.title == "Profile Pictures"
+        current_user.update(picture: @photo.image)
+        current_user.save
+      end
       redirect_to user_photos_of_path(current_user)
     else
       render :edit
@@ -53,7 +58,9 @@ class PhotosController < ApplicationController
   end
 
   def photos_of
+    @photo = Photo.new
     @user           = User.find(params[:user_id])
+    @profile        =
     @photos_of_user = @user.tagged_photos.order("created_at desc")
     @album = Album.new
     1.times { @album.photos.build }

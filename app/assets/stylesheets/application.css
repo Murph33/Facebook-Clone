@@ -441,7 +441,7 @@
  }
 
 a.black_text {
-   color: black ;
+   color: black !important;
  }
 
 .no_border {
@@ -535,6 +535,12 @@ a.black_text {
   position: absolute;
   top: 8px;
   left: 120px;
+}
+.z_index402 {
+  z-index: 402;
+  position: absolute;
+  top: 8px;
+  left: 245px;
 }
 
 .links {

@@ -62,7 +62,8 @@ class UsersController < ApplicationController
   end
 
   def friends
-
+    @user = User.find params[:id]
+    @friends = @user.all_friends
   end
 
   def search

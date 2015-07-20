@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/users/activate" => "users#activate", as: "users_activate"
 
   resources :likes, only: [:destroy]
-  resources :users, except: [:edit] do
+  resources :users, except: [:edit, :index] do
     get :edit, on: :collection
     resources :statuses, only: [:create, :edit, :update, :destroy]
     resources :friendships

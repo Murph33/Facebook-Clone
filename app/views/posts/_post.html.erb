@@ -25,7 +25,11 @@
     <% if post.liking_users.include? current_user %>
       <%= link_to "Unlike", like_path(post.like_for(current_user)), method: :delete, remote: true %>
     <% else %>
-      <%= link_to "Like", post_likes_path(post), method: :post, remote: true %>
+      <% if (post.postee == current_user) || (post.poster == current_user) ||
+         (post.postee.all_friends.include?(current_user)) ||
+          (post.poster.all_friends.include?(current_user)) %>
+        <%= link_to "Like", post_likes_path(post), method: :post, remote: true %>
+      <% end %>
     <% end %>
     <% if post.poster == current_user %>
       <%= link_to "Edit", edit_user_post_path(current_user, post), remote: true %>
@@ -62,7 +66,9 @@
         <% end %>
       </div>
     </div>
-      <% if post.postee.all_friends.include? current_user %>
+      <% if (post.postee == current_user) || (post.poster == current_user) ||
+         (post.postee.all_friends.include?(current_user)) ||
+          (post.poster.all_friends.include?(current_user)) %>
         <div>
           <%= render "comments/form", commentable: post %>
         </div>

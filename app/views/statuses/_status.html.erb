@@ -25,7 +25,9 @@
           <%= link_to "Unlike", like_path(status.like_for current_user),
               method: :delete, remote: true %>
         <% else %>
-          <%= link_to "Like", status_likes_path(status), method: :post, remote: true %>
+          <% if status.user == current_user || (status.user.all_friends.include?(current_user))  %>
+            <%= link_to "Like", status_likes_path(status), method: :post, remote: true %>
+          <% end %>
         <% end %>
         <% if status.user == current_user %>
           <%= link_to "Edit", edit_user_status_path(status.user, status),

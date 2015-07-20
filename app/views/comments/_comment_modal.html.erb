@@ -22,7 +22,9 @@
       <%= link_to "Unlike", like_path(comment.like_for(current_user)),
                       method: :delete, remote: true %>
     <% else %>
-      <%= link_to "Like", comment_likes_path(comment), method: :post, remote: true %>
+      <% if  (comment.user == current_user) || (comment.user.all_friends.include?(current_user)) %>
+        <%= link_to "Like", comment_likes_path(comment), method: :post, remote: true %>
+      <% end %>
     <% end %>
     <% if comment.user == current_user %>
       <%= link_to "Edit", edit_comment_path(comment, comment.commentable), remote: true %>

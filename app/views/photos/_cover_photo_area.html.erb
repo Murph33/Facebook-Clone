@@ -13,7 +13,7 @@
       <div class="inline" id="cover_photo_change">
           <%= form_for [@user, @user.profile] do |f| %>
           <%= f.file_field :cover_photo %>
-          <%= f.submit %>
+          <%= f.submit "Change cover photo" %>
         <% end %>
       </div>
     <% end %>
