@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     resources :requests
     resources :posts
     resources :profiles, only: [:edit, :update]
-    resources :albums, only: [:new, :create, :destroy]
-    resources :photos, only: [:create, :new, :destroy, :update, :index,]
+    resources :albums, only: [:new, :create, :destroy, :show, :edit, :update]
+    resources :photos, except: [:show]
     get "/photos_of" => "photos#photos_of", as: "photos_of"
   end
 # resources :status, only: [:create, :edit, :update, :destroy]

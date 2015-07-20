@@ -1,106 +1,95 @@
-<div class="col-lg-11 col-md-11 col-sm-11 show_header">
-  <div id="cover_photo_area">
-    <% if @user.profile.cover_photo.url(:cover_photo) %>
-      <%= image_tag @user.profile.cover_photo.url(:cover_photo) %>
-    <% else %>
-      <div class="default_cover_photo_area"></div>
-    <% end %>
-    <%= image_tag @user.picture.url(:large), id: "cover_photo_user"  %>
-    <div id="cover_photo_text">
-      <%= @user.full_name %>
+<%= render "photos/cover_photo_area" %>
+
+<div class="col-lg-11 relative">
+  <div style="height: 15px;"></div>
+  <div class="photo_header col-lg-12 col-md-12 col-sm-12 grey" style="height: 40px; color: black;">
+    <span class="heading">Photos</span>
+    <div class="z_index401 inline">
+      <button type="button" class=" " data-toggle="modal" data-target="#album_upload">
+      + Create album
+      </button>
     </div>
-    <% if current_user != @user && !(current_user.all_friends.include? @user) &&
-                                  (!current_user.requestees.include? @user) %>
-      <%= form_for [@user, @request], id:"friend_request_button", remote: true do |f| %>
-      <div class="add_friend_button  background_grey inline">
-        <%= f.submit "Add Friend", class: "background_grey borderless" %>
+    <div class="modal fade" id="album_upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+          <div class="modal-body inline width75 background_white">
+            <%= render 'albums/form' %>
+          </div>
+          <div class="modal-body-text hidden">
+
+          </div>
+        </div>
       </div>
-      <% end %>
-    <% elsif current_user.requestees.include? @user %>
-    <div class="add_friend_button  background_grey inline">Friend Request Sent</div>
-    <% end %>
-    <div class="space_holder"></div>
+    </div>
+    <div class="janky">
+
+    </div>
   </div>
-</div>
 
-
-<div class="col-lg-11">
-<div style="height: 15px;"></div>
-<div class="photo_header col-lg-12 col-md-12 col-sm-12 grey" style="height: 40px; color: black;"> Photos</div>
-
-  <ul class="nav nav-tabs photo_header" role="tablist">
+  <ul class="nav nav-tabs " role="tablist">
     <li role="presentation"class="active photo_header_area" ><a href="#Photos_of_You" aria-controls="Photos_of_You" role="tab" data-toggle="tab">Photos of You</a></li>
     <li role="presentation" class="photo_header_area"><a href="#Your_Photos" aria-controls="Your_Photos" role="tab" data-toggle="tab">Your Photos</a></li>
     <li role="presentation" class="photo_header_area"><a href="#Albums" aria-controls="Albums" role="tab" data-toggle="tab">Albums</a></li>
-    <li role="presentation" class="photo_header_area"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
   </ul>
 
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="Photos_of_You">
-      <% @photos_of_user.each_with_index do |photo, i| %>
-
-        <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
+      <% @photos_of_user.each do |photo| %>
+        <button type="button" class="no_border no_padding margin_bottom" data-toggle="modal" data-target="#<%= dom_id(photo, :tagged) %>">
           <%= image_tag photo.image.url(:album), class: "width100" %>
         </button>
-        <% if i % 3 == 0 %>
-          <div class="col-lg-12 col-md-12 col-sm-12 grey" style="height: 3px"></div>
-        <% end %>
-        <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="<%= dom_id(photo, :tagged) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-body inline width75">
                 <%= image_tag photo.image.url, class: "width100 inline" %>
               </div>
               <div class="modal-body-text">
-
                 <%= render "photos/photo_comment", photo: photo %>
               </div>
             </div>
           </div>
         </div>
-
       <% end %>
+      <div style="height:50px; width: 30px; position:relative;"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="Your_Photos">
-      <% @user.photos.reverse.each_with_index do |photo, i| %>
-
-        <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
+      <% @user.photos.reverse.each do |photo| %>
+        <button type="button" class="no_border no_padding margin_bottom" data-toggle="modal" data-target="#<%= dom_id(photo, :taken) %>">
           <%= image_tag photo.image.url(:album), class: "width100" %>
         </button>
-        <% if i % 3 == 0 %>
-          <div class="col-lg-12 col-md-12 col-sm-12 grey" style="height: 3px"></div>
-        <% end %>
-        <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="<%= dom_id(photo, :taken) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-body inline width75">
                 <%= image_tag photo.image.url, class: "width100 inline" %>
               </div>
               <div class="modal-body-text">
-
                 <%= render "photos/photo_comment", photo: photo %>
               </div>
             </div>
           </div>
         </div>
-
       <% end %>
+      <div style="height:50px; width: 30px; position:relative;"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="Albums">
       <% @albums.each do |album| %>
-        <div class='inline' data-img-list="<%= album.recent_five.map {|img| dom_id(img, :album) }.join(",") %>">
-          <button type="button" class="no_padding proper_size">
+        <div class='inline album' data-img-list="<%= album.recent_five.map {|img| dom_id(img, :album) }.join(",") %>">
+          <%= link_to user_album_path(@user,album), class:"proper_size" do %>
             <% album.recent_five.each do |photo| %>
               <%= image_tag photo.image.url(:album), class:"album_photos_toggle", id:"#{dom_id(photo, :album)}"%>
             <% end %>
-          </button>
-          <div>
-            <%= album.title %>
+          <% end %>
+          <div class="album_footer">
+            <span class="truncated_text">
+              <%= album.truncated.strip %><%= album.truncated == album.title ? "" : "..." %>
+            </span>
+            <div class="date"><%= album.photos.length %> <%= album.photos.length > 1 ? "photos" : "photo" %></div>
           </div>
         </div>
       <% end %>
+      <div style="height:50px; width: 30px; position:relative;"></div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="settings">settings</div>
   </div>
-
 </div>

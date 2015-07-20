@@ -40,6 +40,9 @@
     <% else %>
       <%= link_to "Like", photo_likes_path(photo), method: :post, remote: true %>
     <% end %>
+    <% if photo.user == current_user %>
+      <%= link_to "Edit", edit_user_photo_path(current_user, photo) %>
+    <% end %>
   </div>
   <div class="photo_bottom_half">
     <% if photo.likes.any? %>

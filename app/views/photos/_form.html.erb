@@ -1,8 +1,7 @@
-
 <%= simple_form_for [current_user,@photo] do |f| %>
-<h1>add a photo</h1>
+
   <%= f.input :description %>
   <%= f.input :image %>
-  <%= f.collection_select :album_id, current_user.albums, :id, :title %>
+  <%= f.collection_select :album_id, Album.order(:id).where(user_id: current_user.id) , :id, :title %>
   <%= f.submit %>
 <% end %>

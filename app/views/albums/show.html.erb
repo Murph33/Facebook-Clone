@@ -1,0 +1,61 @@
+<%= render "photos/cover_photo_area" %>
+
+<div class="col-lg-11 relative">
+  <div style="height: 15px;"></div>
+  <div class="photo_header col-lg-12 col-md-12 col-sm-12 grey" style="height: 40px; color: black;">
+    <span class="heading">Photos</span>
+    <span class="rfloat small_padding black_text">
+      <%= link_to "Back", user_photos_of_path(@user), class: "black_text" %>
+    </span>
+    <div class="janky">
+
+    </div>
+  </div>
+
+
+  <div class="album_wrapper">
+    <div class="photo_header col-lg-12 col-md-12 col-sm-12 grey" style="height: 40px; color: black;"> </div>
+    <div class="inner_album_wrapper col-lg-12 col-md-12 col-sm-12">
+
+      <br><br>
+
+      <div class="album_header col-lg-12 col-md-12 col-sm-12">
+        <span class="album_header_text">
+          <%= @album.title %>
+        </span>
+        <div class="date">
+          Updated <%= time_ago_in_words((Time.now-@album.updated_at).seconds.ago) %> ago
+        </div>
+      </div><br><br><br>
+
+
+
+
+      <% @album.photos.each do |photo| %>
+        <span class="inline no_padding" id="<%= dom_id(photo, :delete_purpose) %>">
+          <button type="button" class="no_border no_padding margin_bottom " data-toggle="modal" data-target="#<%= dom_id(photo, photo.album_id) %>">
+            <%= image_tag photo.image.url(:album), class: "width100" %>
+          </button>
+
+          <div class="modal fade" id="<%= dom_id(photo, photo.album_id) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-body inline width75">
+                  <%= image_tag photo.image.url, class: "width100 inline" %>
+                </div>
+                <div class="modal-body-text">
+
+                  <%= render "photos/photo_comment", photo: photo %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><%= link_to "Delete Picture", user_photo_path(current_user, photo),
+                method: :delete, data: {confirm: "Photo will be permanently deleted"},
+                remote: true %>
+        </span>
+      <% end %>
+    <div style="height:50px; width: 30px; position:relative;"></div>
+    </div>
+  </div>
+</div>

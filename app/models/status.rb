@@ -22,7 +22,19 @@ class Status < ActiveRecord::Base
   def self.all_statuses user
     where("user_id IN (?) OR user_id = ?", user.friend_ids, user.id).order("created_at desc")
   end
-  
+
+  def description
+
+  end
+
+  def tagged_users
+    []
+  end
+
+  def commentable
+  end
+
+
   # works below but that's really dumb
   # def self.all_statusesss user
   #   where("user_id IN (:array) OR user_id = :user_id", {array: user.friend_ids, user_id: user.id})

@@ -9,6 +9,10 @@ class Album < ActiveRecord::Base
   validates :title, uniqueness: {scope: :user_id}, presence: true
   validates :photos, presence: true
 
+  def truncated
+    title[0..32]
+  end
+
   def recent_five
     photos.order("id desc").limit(5)
   end

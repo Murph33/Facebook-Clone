@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   var clearIntervalXYZ;
 
-  $('button.proper_size').mouseenter(function(){
+  $('a.proper_size').mouseenter(function(){
     var arrayPhotoIds = $(this).
                                 parents('[data-img-list]').
                                 attr('data-img-list').
@@ -28,7 +28,7 @@ $(document).ready(function(){
     }.bind(this),1350);
   });
 
-  $('button.proper_size').mouseleave(function(){
+  $('a.proper_size').mouseleave(function(){
     var arrayPhotoIds = $(this).
                                 parents('[data-img-list]').
                                 attr('data-img-list').
@@ -44,7 +44,7 @@ $(document).ready(function(){
     clearInterval(clearIntervalXYZ)
   });
 
-  $('button.proper_size').each(function(_,e){
+  $('a.proper_size').each(function(_,e){
     var arrayPhotoIds = $(this).
                                 parents('[data-img-list]').
                                 attr('data-img-list').

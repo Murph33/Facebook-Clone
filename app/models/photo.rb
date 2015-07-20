@@ -14,7 +14,9 @@ class Photo < ActiveRecord::Base
 
   has_many :tagged_users, through: :taggings, source: :user
   has_many :taggings, dependent: :destroy
-  
+
+  validates :image, presence: true
+
   def truncated
     description[0..250] if description
   end

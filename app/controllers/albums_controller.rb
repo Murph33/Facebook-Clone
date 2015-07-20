@@ -10,11 +10,36 @@ class AlbumsController < ApplicationController
   def create
     @album = current_user.albums.new album_params
     if @album.save
-      render
+      redirect_to user_album_path(current_user, @album)
     else
       photo_count = 1 - @album.photos.length
       photo_count.times { @album.photos.build }
-      render { create_failure }
+      @user           = User.find(params[:user_id])
+      render :new
+    end
+  end
+
+  def edit
+    @album = current_user.albums.find(params[:id])
+  end
+
+  def update
+    @album = current_user.albums.find(params[:id])
+    respond_to do |format|
+      if @album.update album_params
+        format.js {redirect_to user_album_path(current_user,@album)}
+      else
+        format.js {render :edit}
+      end
+    end
+  end
+
+  def show
+    @user = User.find params[:user_id]
+    @album = @user.albums.find params[:id]
+    if @album.user == current_user || (@album.user.all_friends.include?(current_user))
+    else
+      redirect_to current_user, notice: "You don't have permission to view that album"
     end
   end
 

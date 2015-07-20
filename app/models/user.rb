@@ -1,6 +1,6 @@
   class User < ActiveRecord::Base
 
-  POSSIBLE_GENDERS = ["Male", "Female", "Trans mtf", "Trans ftm", "Fluid"]
+  POSSIBLE_GENDERS = ["Male", "Female", "Other"]
 
 #  has_many :active_requests, class_name: "Request", foreign_key: :requester_id,
 ##                        dependent: :destroy

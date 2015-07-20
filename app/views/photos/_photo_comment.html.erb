@@ -1,3 +1,4 @@
+<% if photo %>
 <div class="photo <%= dom_id(photo, :feed) %>">
   <div class="photo_top_half">
     <%= link_to photo.user do %>
@@ -38,29 +39,34 @@
     <% if photo.liking_users.include? current_user %>
       <%= link_to "Unlike", like_path(photo.like_for(current_user)), method: :delete, remote: true %>
     <% else %>
-      <% if photo.user.all_friends.include?(current_user) || photo.tagged_users.include?(current_user)  %>
+      <% if photo.user.all_friends.include?(current_user) || photo.tagged_users.include?(current_user) || photo.user == current_user  %>
         <%= link_to "Like", photo_likes_path(photo), method: :post, remote: true %>
       <% end %>
+    <% end %>
+    <% if photo.user == current_user %>
+      <%= link_to "Edit", edit_user_photo_path(current_user, photo) %>
     <% end %>
   </div>
   <div class="photo_bottom_half">
     <% if photo.likes.any? %>
       <div class="like_box">
-        <% if photo.liking_users.include? current_user %>
-          <i class="glyphicon glyphicon-thumbs-up"></i>
-          You like this.
-          <% if photo.liking_users.length > 2 %>
-            <%= photo.liking_users.length - 1 %> other people do too.
-          <% elsif photo.liking_users.length == 2 %>
-            <%= photo.liking_users.length - 1 %> other person does too.
-          <% end %>
-        <% else %>
-        <%= link_to "<i class='glyphicon glyphicon-thumbs-up'></i>".html_safe,
-                photo_likes_path(photo), method: :post, remote: true  %>
-          <% if photo.liking_users.length > 1 %>
-            <%= photo.liking_users.length %> people liked this.
-          <% elsif photo.liking_users.length == 1 %>
-            1 person liked this.
+        <% if photo.liking_users %>
+          <% if photo.liking_users.include? current_user %>
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+            You like this.
+            <% if photo.liking_users.length > 2 %>
+              <%= photo.liking_users.length - 1 %> other people do too.
+            <% elsif photo.liking_users.length == 2 %>
+              <%= photo.liking_users.length - 1 %> other person does too.
+            <% end %>
+          <% else %>
+          <%= link_to "<i class='glyphicon glyphicon-thumbs-up'></i>".html_safe,
+                  photo_likes_path(photo), method: :post, remote: true  %>
+            <% if photo.liking_users.length > 1 %>
+              <%= photo.liking_users.length %> people liked this.
+            <% elsif photo.liking_users.length == 1 %>
+              1 person liked this.
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -79,3 +85,4 @@
       <% end %>
   </div>
 </div>
+<% end %>

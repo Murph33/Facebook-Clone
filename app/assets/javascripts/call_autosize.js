@@ -87,6 +87,10 @@ $(document).ready(function(){
     $(this).remove()
   });
 
-
+  $('#cover_photo_area').hover(function() {
+    $('#cover_photo_change').show();
+  },function() {
+    $('#cover_photo_change').hide();
+  });
 
 });

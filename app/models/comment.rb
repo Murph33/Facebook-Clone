@@ -16,8 +16,12 @@ class Comment < ActiveRecord::Base
   end
 
   def tagged_users
-    nil
+    []
   end
+  #
+  # def liking_users
+  #   []
+  # end
 
   def comments
     Comment.all

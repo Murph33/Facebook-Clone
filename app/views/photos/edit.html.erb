@@ -1,0 +1,5 @@
+<h1>Edit your photo</h1>
+
+<%= render "form" %>
+<%= link_to "Delete photo", user_photo_path(current_user,@photo),
+    method: :delete, data: {confirm: "Photo will be permanently deleted"}%>

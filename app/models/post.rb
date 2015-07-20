@@ -27,6 +27,20 @@ class Post < ActiveRecord::Base
     "#{poster.full_name} -> #{postee.full_name}: #{body} #{created_at}"
   end
 
+  def user
+    poster
+  end
+
+  def commentable
+  end
+
+  def description
+  end
+
+  def tagged_users
+    []
+  end
+
 private
 
   def friends

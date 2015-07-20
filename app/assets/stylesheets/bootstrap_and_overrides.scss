@@ -55,3 +55,30 @@
   margin: 0px;
   display: inline-block;
 }
+
+.nav-tabs {
+  // background-color: #F6F7F8;
+  // border-left: 1px solid #D3D6DB;
+  // border-right: 1px solid #D3D6DB;
+}
+
+.inner_album_wrapper {
+  padding-top: 5px;
+  background-color: #fff;
+  border: 1px solid #D3D6DB;
+
+}
+
+.album_header {
+  text-align: center
+}
+
+.album_header_text {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.date {
+  color: #9197A3;
+  font-size: .75em;
+}
