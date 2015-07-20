@@ -20,7 +20,8 @@ class Status < ActiveRecord::Base
   end
 
   def self.all_statuses user
-    where("user_id IN (?) OR user_id = ?", user.friend_ids, user.id).order("created_at desc")
+    where("user_id IN (?) OR user_id IN (?) OR user_id = ?", user.friend_ids,
+    user.inverse_friend_ids, user.id).order("created_at desc")
   end
 
   def description

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'puma'
+gem 'actioncable', github: 'rails/actioncable'
 gem 'rails', '4.2.1'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
