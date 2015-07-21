@@ -22,6 +22,11 @@
   has_one :profile, dependent: :destroy
   mount_uploader :picture, ProfilePictureUploader
 
+  has_many :sent_messages, class_name: :Message, foreign_key: :sender_id, dependent: :destroy
+  has_many :received_messages, class_name: :Message, foreign_key: :receiver_id, dependent: :destroy
+  has_many :receivers, through: :sent_messages
+  has_many :senders, through: :received_messages
+
   has_many :requesters, through: :passive_requests
   has_many :requestees, through: :active_requests
   has_many :active_requests, class_name: :Request, foreign_key: :requester_id, dependent: :destroy
@@ -125,6 +130,10 @@
 
   def tagged_photo photo
     taggings.find_by_photo_id(photo.id)
+  end
+
+  def all_photos
+    (tagged_photos + photos).uniq.sort_by {|photo| photo.updated_at}
   end
 
   private

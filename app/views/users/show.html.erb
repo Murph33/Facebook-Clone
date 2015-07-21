@@ -68,3 +68,13 @@
     </div>
   <% end %>
 </div>
+<div id="<%= @message_variable %>">
+<%= simple_form_for (@message), remote: true, authenticity_token: true do |f| %>
+
+  <%= f.hidden_field :sender_id, value: current_user.id  %>
+  <%= f.hidden_field :receiver_id, value: @user.id %>
+  <%= f.input :body %>
+  <%= f.submit %>
+
+<% end %>
+</div>

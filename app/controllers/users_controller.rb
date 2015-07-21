@@ -45,13 +45,15 @@ class UsersController < ApplicationController
   end
 
   def show
+    @message = Message.new
     @user = User.find params[:id]
+    @message_variable = [current_user.id, @user.id].sort.join("_")
     @statuses = @user.statuses
     @status = Status.new
     @post = Post.new
     @comment = Comment.new
     @friends = (@user.all_friends).shuffle
-    @photos = @user.photos.order("created_at desc")
+    @photos = @user.all_photos
     @request = Request.new
     #SHOULD ADD SOMETHING THAT IS LIKE user.all_photos AND INCLUDED TAGGED PHOTOS.
     #..... once I implement tagging LOL!

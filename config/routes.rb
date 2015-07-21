@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     resources :photos, except: [:show]
     get "/photos_of" => "photos#photos_of", as: "photos_of"
   end
-# resources :status, only: [:create, :edit, :update, :destroy]
+
+  resources :messages, only: [:create, :index]
+
   resources :posts, only: [] do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :update]

@@ -3,6 +3,8 @@ class TaggingsController < ApplicationController
   def create
     tagging_params = params.require(:tagging).permit(:user_id, :photo_id)
     @tag = Tagging.create tagging_params
+    photo = Photo.find(params[:tagging][:photo_id])
+    photo.touch
   end
 
   def destroy
