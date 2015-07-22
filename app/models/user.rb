@@ -3,16 +3,16 @@
   POSSIBLE_GENDERS = ["Male", "Female", "Other"]
 
 #  has_many :active_requests, class_name: "Request", foreign_key: :requester_id,
-##                        dependent: :destroy
-##  has_many :passive_requests, class_name: "Request", foreign_key: :requestee_id,
-##                        dependent: :destroy
-##  has_many :requestees, through: :active_requests
-##  has_many :requesters, through: :passive_requests
-##
-##  has_many :friendships, dependent: :destroy
-##  has_many :friends, through: :friendships
-##  has_many :inverse_friends, through: :inverse_friendships, source: :user
-##  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id",
+#                        dependent: :destroy
+#  has_many :passive_requests, class_name: "Request", foreign_key: :requestee_id,
+#                        dependent: :destroy
+#  has_many :requestees, through: :active_requests
+#  has_many :requesters, through: :passive_requests
+#
+#  has_many :friendships, dependent: :destroy
+#  has_many :friends, through: :friendships
+#  has_many :inverse_friends, through: :inverse_friendships, source: :user
+#  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id",
 #              dependent: :destroy
 
   extend FriendlyId
@@ -183,9 +183,3 @@
   # end
 
 end
-  # def timeline
-  #   timeline = []
-  #   received_posts.each { |post| timeline << post }
-  #   statuses.each { |status| timeline << status }
-  #   timeline = timeline.sort_by {|x| x.created_at}
-  # end

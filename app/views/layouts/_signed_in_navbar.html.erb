@@ -2,8 +2,11 @@
   <div class="container-margins">
     <form class="navbar-form navbar-left slim col-lg-8 col-md-6 col-sm-6" role="search">
       <div class="form-group width100 slim">
-        <%= link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
+        <%# link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
                 root_path, class: 'inline' %>
+        <%= link_to root_path, class: 'inline' do %>
+          <%= image_tag "logo.jpg" %>
+        <% end %>
         <div class="inline search_bar">
           <input type="text" name="search_bar"
           class="width85 inline slim borderless2" placeholder="  Search Fakebook">

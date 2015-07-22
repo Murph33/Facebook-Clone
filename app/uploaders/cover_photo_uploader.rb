@@ -27,7 +27,7 @@ class CoverPhotoUploader < CarrierWave::Uploader::Base
   process resize_to_fit: [1200, 800]
 
   version :cover_photo do
-    process resize_to_fill: [850, 315]
+    process resize_to_fill: [904, 315]
   end
 
 

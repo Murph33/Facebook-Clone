@@ -14,21 +14,23 @@ $(document).ready(function(){
               var newChatWindow = $("<div class='chat_window' id=" + divID + " />")
               var newChatBox = $("<div class='chat_box' id=chat_box" + divID + " />")
               var newChatHeader = $('<div class="chat_header" />')
-              // console.log((data[0]["sender_id"] == ($(this).attr('friend-id'))))
               data[0]["sender_id"] == ($(this).attr('friend-id')) ?
               (newChatHeader.html(data[0]["sender_name"])) : (newChatHeader.html(data[0]["receiver_name"]))
-              $('#active_chat_container').append(newChatWindow)
-              $('#' + divID).append(newChatHeader)
-              $('#' + divID).append(newChatBox)
-              data.forEach(function(ele,index){
-                data[index]["sender_id"] == ($(this).attr('friend-id')) ?  $('#chat_box' + divID).append( "<div class='user_receive_container'> <img style='left: 0px' src=" + ele.sender_image + " /> <div class='user_receive'>" + ele["body"] + "</div></div>") : $('#chat_box' + divID).append( "<div class='user_send_container'> <div class='user_send'>" + ele["body"] + "</div></div>")
-              }.bind(this));
-              $('#' + divID).append("<input type='text' receiver='" + $(this).attr('friend-id') + "' class='chat_input' />")
-              $('#chat_box' + divID).scrollTop($('#chat_box' + divID)[0].scrollHeight);
-              setTimeout(function(){
+              if ($('div.chat_window#' + divID).length > 0) {
+
+              } else {
+                $('#active_chat_container').append(newChatWindow)
+                $('#' + divID).append(newChatHeader)
+                $('#' + divID).append(newChatBox)
+                data.forEach(function(ele,index){
+                  data[index]["sender_id"] == ($(this).attr('friend-id')) ?  $('#chat_box' + divID).append( "<div class='user_receive_container'> <img style='left: 0px' src=" + ele.sender_image + " /> <div class='user_receive'>" + ele["body"] + "</div></div>") : $('#chat_box' + divID).append( "<div class='user_send_container'> <div class='user_send'>" + ele["body"] + "</div></div>")
+                }.bind(this));
+                $('#' + divID).append("<input type='text' receiver='" + $(this).attr('friend-id') + "' class='chat_input' />")
                 $('#chat_box' + divID).scrollTop($('#chat_box' + divID)[0].scrollHeight);
-              },10)
-              // $('#active_chat_container').append(data)
+                setTimeout(function(){
+                  $('#chat_box' + divID).scrollTop($('#chat_box' + divID)[0].scrollHeight);
+                },10)
+              }
             }.bind(this))
   });
 

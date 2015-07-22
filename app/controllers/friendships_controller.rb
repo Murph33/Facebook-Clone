@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
   before_action :verify_account!
   before_action :authenticate_user!
   def create
-    friend = User.friendly.find_by_id params[:user_id]
+    friend = User.friendly.find params[:user_id]
     @friendship = current_user.friendships.new
     @friendship.friend = friend
     if @friendship.save
