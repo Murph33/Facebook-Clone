@@ -112,6 +112,10 @@
    font-size: 1.4em;
  }
 
+ .right_padding {
+   padding: 0px 15px 0 0;
+ }
+
  .default_cover_photo_area {
    background-color: #232937;
    height: 200px;
@@ -384,10 +388,10 @@
    border-style: none;
    border-color: Transparent;
    overflow: auto;
-   outline: none;
+   outline: none !important;
    -webkit-box-shadow: none;
    -moz-box-shadow: none;
-   box-shadow: none;
+   box-shadow: none !important;
    resize: none;
  }
  .borderless2 {
@@ -564,7 +568,7 @@
 .janky {
   position: absolute;
   background-color: red;
-  width: 580px;
+  width: 590px;
   height: 52px;
   border-right: 1px solid #D3D6DB;
   background-color: #F6F7F8;;

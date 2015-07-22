@@ -12,8 +12,7 @@ class PostsController < ApplicationController
         format.js { render }
         format.html { redirect_to @user, notice: "Message Posted!" }
       else
-        flash[:alert] = "Something went wrong!"
-        format.js { render }
+        format.js { render :create_failure }
         format.html { render "/users/show" }
       end
     end

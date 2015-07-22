@@ -1,21 +1,23 @@
 <div class="container navbar-fixed">
   <div class="container-margins">
-    <form class="navbar-form navbar-left slim col-lg-8 col-md-6 col-sm-6" role="search">
-      <div class="form-group width100 slim">
-        <%# link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
-                root_path, class: 'inline' %>
-        <%= link_to root_path, class: 'inline' do %>
-          <%= image_tag "logo.jpg" %>
-        <% end %>
-        <div class="inline search_bar">
-          <input type="text" name="search_bar"
-          class="width85 inline slim borderless2" placeholder="  Search Fakebook">
-          <button type="submit" class="rfloat btn-primary button-colors">Submit</button>
+    <div class="navbar-form navbar-left slim col-lg-8 col-md-6 col-sm-6 col-xs-6">
+      <form class="" role="search">
+        <div class="form-group width100 slim">
+          <%# link_to "<i class='glyphicon glyphicon-text-background vivid'></i>".html_safe,
+                  root_path, class: 'inline' %>
+          <%= link_to root_path, class: 'inline' do %>
+            <%= image_tag "logo.jpg" %>
+          <% end %>
+          <div class="inline search_bar">
+            <input type="text" name="search_bar"
+            class="width85 inline slim borderless2" placeholder="  Search Fakebook">
+            <button type="submit" class="rfloat btn-primary button-colors">Submit</button>
+          </div>
+          <div id="replaceable"></div>
         </div>
-        <div id="replaceable"></div>
-      </div>
-    </form>
-    <div class="navbar-right margin-top col-lg-4 col-md-4 col-sm-4">
+      </form>
+    </div>
+    <div class="navbar-right margin-top col-lg-4 col-md-4 col-sm-4 col-xs-6">
 
       <div class="button btn-primary button-colors inline ">
         <%= link_to current_user, class: "btn-primary button inline button-colors" do %>

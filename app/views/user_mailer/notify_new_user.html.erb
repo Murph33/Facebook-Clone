@@ -2,4 +2,4 @@ Hi there, <%= @user.first_name %>!  Thanks for signing up for Fakebook!
 
 Just follow this link right here in order to verify your email address and get started on Fakebook!
 
-<%= link_to "localhost:3000#{users_activate_path(token: @user.token)}","localhost:3000#{users_activate_path(token: @user.token)}" %>
+<%= link_to "http://localhost:3000#{users_activate_path(token: @user.token)}","http://localhost:3000#{users_activate_path(token: @user.token)}" %>
