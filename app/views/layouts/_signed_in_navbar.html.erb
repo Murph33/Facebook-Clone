@@ -76,7 +76,7 @@
             <div class="message_popdown">
               <% current_user.unseen_messages.each do |msg| %>
                 <li>
-                  <div class="friend_request_area black_text">
+                  <div class="friend_request_area black_text" friend-id="<%= msg.sender.id %>">
                     <%= image_tag msg.sender.picture.url(:avatar) %>
                     <%= msg.sender.first_name %>:<%= msg.body %>
                   </div>

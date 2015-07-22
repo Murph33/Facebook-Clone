@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user ||= current_user
     @user ||= User.new
     @status = Status.new
-    @statuses = Status.all_statuses @user
+    @statuses = Status.all_statuses(@user).page(params[:page]).per(10)
   end
 
   def create
@@ -55,6 +55,7 @@ class UsersController < ApplicationController
     @friends = (@user.all_friends).shuffle
     @photos = @user.photos.order("created_at desc")
     @request = Request.new
+    @events = Kaminari.paginate_array(@user.newsfeed).page(params[:page]).per(7)
     #SHOULD ADD SOMETHING THAT IS LIKE user.all_photos AND INCLUDED TAGGED PHOTOS.
     #..... once I implement tagging LOL!
   end

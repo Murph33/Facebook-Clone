@@ -12,10 +12,14 @@
     <%= render 'statuses/form' %>
 
     <div id="home_feed">
-      <% @statuses.each do |status| %>
-        <%= render "statuses/status", status: status %>
-      <% end %>
+      <div class="page">
+        <%= render @statuses %>
+        <%# @statuses.each do |status| %>
+          <%# render "statuses/status", status: status %>
+        <%# end %>
+      </div>
     </div>
+    <%= paginate @statuses %>
   </div>
 <% elsif current_user %>
 <br><br>

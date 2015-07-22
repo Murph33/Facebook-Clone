@@ -62,9 +62,12 @@
   <% end %>
   <% if @user.newsfeed %>
     <div id="newsfeed">
-      <% @user.newsfeed.each do |event| %>
-        <%= render partial: event %>
-      <% end %>
+      <div class="page">
+        <% @events.each do |event| %>
+          <%= render partial: event %>
+        <% end %>
+      </div>
     </div>
+    <%= paginate @events %>
   <% end %>
 </div>

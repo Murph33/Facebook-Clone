@@ -5,7 +5,9 @@ $(document).ready(function(){
   });
 
   $(document).on('focusin', '.chat_window', function(){
-    $.get('http://localhost:3000/messages/seen');
+    var senderID = $(this).find('input[class="chat_input"]').attr('receiver')
+    console.log(senderID)
+    $.get('http://localhost:3000/messages/seen_from?sender_id=' + senderID);
   });
 
 });

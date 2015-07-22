@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
+//= require jquery.infinitescroll
 //= require bootstrap-sprockets
 //= require channels
 //= require_tree .

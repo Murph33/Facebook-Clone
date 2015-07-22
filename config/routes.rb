@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # scope :format => true, :constraints => { :format => 'json' } do
   get "/messages/conversation" => "messages#conversation", as: "conversation"
   get "/messages/seen" => "messages#seen_all", as: "seen"
+  get "/messages/seen_from" => "messages#seen_from", as: "seen_from"
   # end
 
   resources :posts, only: [] do

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'kaminari'
 gem 'puma'
 gem 'actioncable', github: 'rails/actioncable'
 gem 'rails', '4.2.1'

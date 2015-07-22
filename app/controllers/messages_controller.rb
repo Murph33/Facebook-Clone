@@ -38,6 +38,10 @@ class MessagesController < ApplicationController
     current_user.unseen_messages.update_all seen: true
   end
 
+  def seen_from
+    current_user.unseen_messages.where(sender_id: params[:sender_id]).update_all seen: true
+  end
+
   def conversation
   @user1 = current_user
   @user2 = params[:user2]
