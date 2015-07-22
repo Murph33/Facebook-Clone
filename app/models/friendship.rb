@@ -16,7 +16,7 @@ class Friendship < ActiveRecord::Base
   private
 
   def no_duplicate
-    if (Friendship.find_friendship User.find(user_id), User.find(friend_id)).present?
+    if (Friendship.find_friendship User.friendly.find(user_id), User.friendly.find(friend_id)).present?
       errors.add(:user_id, "Only one friendship between a pair")
     end
   end

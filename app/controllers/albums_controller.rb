@@ -14,7 +14,7 @@ class AlbumsController < ApplicationController
     else
       photo_count = 1 - @album.photos.length
       photo_count.times { @album.photos.build }
-      @user           = User.find(params[:user_id])
+      @user           = User.friendly.find(params[:user_id])
       render :new
     end
   end
@@ -35,7 +35,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @user = User.find params[:user_id]
+    @user = User.friendly.find params[:user_id]
     @album = @user.albums.find params[:id]
     if @album.user == current_user || (@album.user.all_friends.include?(current_user))
     else

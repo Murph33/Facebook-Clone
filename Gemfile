@@ -16,6 +16,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 gem 'bootstrap-sass'
+gem 'friendly_id'
 gem 'cancancan'
 gem 'has_secure_token'
 gem 'friendly_id'

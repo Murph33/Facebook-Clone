@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    user = User.find_by_id(params[:user_id])
+    user = User.friendly.find_by_id(params[:user_id])
     @photos = Photo.where(user:user)
   end
 
@@ -59,7 +59,7 @@ class PhotosController < ApplicationController
 
   def photos_of
     @photo = Photo.new
-    @user           = User.find(params[:user_id])
+    @user           = User.friendly.find(params[:user_id])
     @profile        =
     @photos_of_user = @user.tagged_photos.order("created_at desc")
     @album = Album.new

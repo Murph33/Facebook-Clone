@@ -15,6 +15,12 @@
 ##  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id",
 #              dependent: :destroy
 
+  extend FriendlyId
+  friendly_id :first_name, use: :slugged
+
+  def slug_candidates
+    [ :first_name, [:first_name, :last_name], [:first_name, :last_name, rand(500)]]
+  end
 
   has_secure_token
   has_secure_password

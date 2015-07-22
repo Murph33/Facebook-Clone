@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def home
-    # @user = User.find_by_id(session[:user_id])
+    # @user = User.friendly.find_by_id(session[:user_id])
     @user ||= current_user
     @user ||= User.new
     @status = Status.new
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find session[:user_id]
+    @user = User.friendly.find session[:user_id]
     if @user.authenticate(params[:user][:current_password]) && @user.update(user_params)
       redirect_to @user, notice: "Profile updated!"
     else
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   def show
     @message = Message.new
-    @user = User.find params[:id]
+    @user = User.friendly.find params[:id]
     @message_variable = [current_user.id, @user.id].sort.join("_")
     @statuses = @user.statuses
     @status = Status.new
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @user = User.find params[:id]
+    @user = User.friendly.find params[:id]
     @friends = @user.all_friends
   end
 

@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
   def create
     request = current_user.active_requests.new
-    request.requestee = User.find(params[:user_id])
+    request.requestee = User.friendly.find(params[:user_id])
     if request.save
       render
     else
@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    requester = User.find(params[:id])
+    requester = User.friendly.find(params[:id])
 
     @request = Request.where('requestee_id = ? AND requester_id = ?',
                     current_user, requester).first

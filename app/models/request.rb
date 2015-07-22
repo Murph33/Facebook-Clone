@@ -22,7 +22,7 @@ class Request < ActiveRecord::Base
   end
 
   def no_inverse
-    if User.find(requester_id).requester_ids.include?(requestee_id)
+    if User.friendly.find(requester_id).requester_ids.include?(requestee_id)
       errors.add(:requester_id, "Don't duplicate requests")
     end
   end
