@@ -334,6 +334,11 @@
    background-color: #F6F7F8;
  }
 
+.message_popdown {
+  overflow: scroll;
+  max-height: 350px;
+}
+
  .overflow {
    overflow: auto
  }
@@ -641,4 +646,8 @@
 
 .background_white {
   background-color: white;
+}
+
+.hidden {
+  display: none;
 }

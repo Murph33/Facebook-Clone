@@ -23,6 +23,10 @@ Rails.application.routes.draw do
   end
 
   resources :messages, only: [:create, :index]
+  # scope :format => true, :constraints => { :format => 'json' } do
+  get "/messages/conversation" => "messages#conversation", as: "conversation"
+  get "/messages/seen" => "messages#seen_all", as: "seen"
+  # end
 
   resources :posts, only: [] do
     resources :likes, only: [:create, :destroy]

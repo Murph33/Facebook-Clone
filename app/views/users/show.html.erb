@@ -54,27 +54,19 @@
 
 </div>
 <div class="col-lg-1 col-md-1 col-sm-2 spacer"></div>
-<div class="col-lg-6 col-md-6 col-sm-6">
-  <% if @user == current_user %>
-    <%= render "/statuses/form" %>
-  <% elsif (current_user.all_friends).include?(@user) %>
-    <%= render "/posts/form" %>
-  <% end %>
-  <% if @user.newsfeed %>
-    <div id="newsfeed">
-      <% @user.newsfeed.each do |event| %>
-        <%= render partial: event %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-<div id="<%= @message_variable %>">
-<%= form_for (@message), remote: true, authenticity_token: true do |f| %>
+  <div class="col-lg-6 col-md-6 col-sm-6">
+    <% if @user == current_user %>
+      <%= render "/statuses/form" %>
+    <% elsif (current_user.all_friends).include?(@user) %>
+      <%= render "/posts/form" %>
+    <% end %>
+    <% if @user.newsfeed %>
+      <div id="newsfeed">
+        <% @user.newsfeed.each do |event| %>
+          <%= render partial: event %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
-  <%= f.hidden_field :sender_id, value: current_user.id  %>
-  <%= f.hidden_field :receiver_id, value: @user.id %>
-  <%= f.text_field :body %>
-  <%= f.submit %>
-
-<% end %>
 </div>

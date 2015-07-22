@@ -8,10 +8,12 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
 
+  after_initialize :not_seen
+
   def self.find_conversation user_id1, user_id2
     where("(sender_id = :user_id  AND receiver_id = :friend_id) OR
                 (sender_id = :friend_id  AND receiver_id = :user_id)",
-                {user_id: user_id1, friend_id: user_id2})
+                {user_id: user_id1, friend_id: user_id2}).order(:created_at)
   end
 
   private
@@ -20,6 +22,10 @@ class Message < ActiveRecord::Base
     if sender_id == receiver_id
       errors.add(:sender_id, "Don't message yourself")
     end
+  end
+
+  def not_seen
+    self.seen = false
   end
 
 end

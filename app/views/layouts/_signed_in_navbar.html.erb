@@ -67,6 +67,25 @@
       <% else %>
         <i class="glyphicon glyphicon-user friend_requests_inactive"></i>
       <% end %>
+      <% if current_user.unseen_messages.any? %>
+        <div class="dropdown inline">
+          <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-envelope friend_requests_active"></i>
+          </a>
+          <ul class="dropdown-menu" >
+            <div class="message_popdown">
+              <% current_user.unseen_messages.each do |msg| %>
+                <li>
+                  <div class="friend_request_area black_text">
+                    <%= image_tag msg.sender.picture.url(:avatar) %>
+                    <%= msg.sender.first_name %>:<%= msg.body %>
+                  </div>
+                </li>
+              <% end %>
+            </div>
+          </ul>
+        </div>
+      <% end %>
         <div class="dropdown inline">
           <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon glyphicon-chevron-down"></i>

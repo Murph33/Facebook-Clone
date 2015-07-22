@@ -110,6 +110,10 @@
     (friends + inverse_friends)
   end
 
+  def sorted_all_friends
+    (friends + inverse_friends).sort_by { |f| f.first_name }
+  end
+
   def mutual_friends user
     all_friends & user.all_friends
   end
@@ -134,6 +138,10 @@
 
   def all_photos
     (tagged_photos + photos).uniq.sort_by {|photo| photo.updated_at}
+  end
+
+  def unseen_messages
+    received_messages.where(seen: false)
   end
 
   private

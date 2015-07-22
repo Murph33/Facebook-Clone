@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="user_id" value="<%= current_user.id %>">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 </head>
 <body>
@@ -36,5 +37,18 @@
   </div>
   <div style="height:80px; width: 30px; position:relative;"></div>
 </div>
+<% if current_user %>
+  <% if current_user.all_friends %>
+    <div id="friends_chat_list" class="hidden">
+      <% current_user.sorted_all_friends.each do |friend| %>
+        <div class="friend_box" friend-id="<%= friend.id %>">
+          <%= image_tag friend.picture.url(:avatar) %><%= friend.full_name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div id="chat_bar">Chat</div>
+  <div id="active_chat_container"></div>
+<% end %>
 </body>
 </html>
