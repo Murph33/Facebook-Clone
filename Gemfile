@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.2'
 gem 'kaminari'
 gem 'puma'
 gem 'actioncable', github: 'rails/actioncable'
@@ -19,7 +19,6 @@ gem 'bootstrap-sass'
 gem 'friendly_id'
 gem 'cancancan'
 gem 'has_secure_token'
-gem 'friendly_id'
 gem "simple_form"
 gem 'carrierwave'
 gem "mini_magick"
