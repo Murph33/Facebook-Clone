@@ -18,10 +18,6 @@
  box-sizing: border-box;
 }
 
-.chat_window {
-  float: right;
-}
-
  .relative {
    position: relative;
  }
@@ -447,7 +443,7 @@
 }
 
  .navbar-right {
-   position: absolute
+   position: absolute;
    float: right;
    right: 0px;
  }
