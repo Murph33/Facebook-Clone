@@ -8,8 +8,9 @@ class TaggingsController < ApplicationController
   end
 
   def destroy
-    user = User.friendly.find_by_id params[:user_id]
-    if user
+
+    if params[:user_id]
+      user = User.friendly.find params[:user_id]
       tagging = Tagging.where(photo_id: params[:photo_id], user_id: user.id)
       @tag = tagging.first
       tagging.destroy_all
