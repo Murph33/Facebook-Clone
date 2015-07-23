@@ -92,7 +92,6 @@ div.modal-body-text {
 }
 
 .chat_window {
-  float: right;
   position: relative;
   width: 250px;
   height: 275px;
@@ -101,14 +100,16 @@ div.modal-body-text {
   overflow: scroll;
   margin-left: 9px;
 }
+
 .chat_box {
-  float: right;
   position: relative;
   width: 250px;
   height: 225px;
   color: black;
   background-color: #E9EAED;
   overflow: scroll;
+  border-left: 1px solid #ACB2C1;
+  border-right: 1px solid #ACB2C1;
 }
 
 .chat_input {
@@ -119,6 +120,7 @@ div.modal-body-text {
 .chat_header {
   height: 25px;
   width: 100%;
+  border: 1px solid #2E4588;
   background-color: #5C76B0;
   color: white;
   font-weight: bold;
