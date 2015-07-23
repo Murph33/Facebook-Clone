@@ -1,3 +1,4 @@
+<div class="hello">
 <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -10,7 +11,7 @@
     </div>
   </div>
 </div>
-<div class="hello photo <%= dom_id(photo, :feed) %>">
+<div class="photo <%= dom_id(photo, :feed) %>">
   <div class="photo_top_half">
     <%= link_to photo.user do %>
       <%= image_tag photo.user.picture.url(:avatar), class: "inline clearfix" %>
@@ -81,4 +82,5 @@
         </div>
       <% end %>
   </div>
+</div>
 </div>
