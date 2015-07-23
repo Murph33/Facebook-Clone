@@ -7,7 +7,6 @@ class Album < ActiveRecord::Base
                                   reject_if: lambda {|x| !x[:image].present?}
 
   validates :title, uniqueness: {scope: :user_id}, presence: true
-  validates :photos, presence: true
 
   def truncated
     title[0..32]

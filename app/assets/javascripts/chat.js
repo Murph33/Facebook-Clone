@@ -15,7 +15,8 @@ $(document).ready(function(){
               var newChatBox = $("<div class='chat_box' id=chat_box" + divID + " />")
               var newChatHeader = $('<div class="chat_header" />')
               data[0]["sender_id"] == ($(this).attr('friend-id')) ?
-              (newChatHeader.html(data[0]["sender_name"])) : (newChatHeader.html(data[0]["receiver_name"]))
+              (newChatHeader.html("<span class='message_header_name' friend_id='" + data[0]["sender_id"] + "'>" + (data[0]["sender_name"]) + "</span>")) :
+              (newChatHeader.html("<span class='message_header_name' friend_id='" + data[0]["receiver_id"] + "'>" + (data[0]["receiver_name"]) + "</span>"))
               if ($('div.chat_window#' + divID).length > 0) {
 
               } else {
@@ -54,5 +55,12 @@ $(document).ready(function(){
   $(document).on('click', '.chat_header', function(){
     $(this).parents('.chat_window').remove();
   });
+
+  $(document).on('click', 'span.message_header_name', function(e){
+    e.stopPropagation()
+    var id = $(this).attr('friend_id')
+    window.location.href=("http://localhost:3000/users/" + id)
+    console.log("http://localhost:3000/users/" + id)
+  })
 
 });

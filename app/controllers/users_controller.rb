@@ -38,6 +38,8 @@ class UsersController < ApplicationController
   def update
     @user = User.friendly.find session[:user_id]
     if @user.authenticate(params[:user][:current_password]) && @user.update(user_params)
+      @user.slug = nil
+      @user.save
       redirect_to @user, notice: "Profile updated!"
     else
       render :edit, alert: "Something went wrong!"

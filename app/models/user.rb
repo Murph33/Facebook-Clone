@@ -16,7 +16,7 @@
 #              dependent: :destroy
 
   extend FriendlyId
-  friendly_id :first_name, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
 
   def slug_candidates
     [ :first_name, [:first_name, :last_name], [:first_name, :last_name, rand(500)]]
@@ -54,8 +54,6 @@
   has_many :liked_posts, through: :likes, source: :likeable, source_type: :Post
   has_many :liked_comment, through: :likes, source: :likeable, source_type: :Comment
 
-  has_many :replied_to_comments, through: :replies, source: :comment
-
   has_many :commented_posts, through: :comments, source: :commentable,
                                                  source_type: :Post
   has_many :commented_photos, through: :comments, source: :commentable,
@@ -80,7 +78,6 @@
   # has_many :followers, through: :active_relationships,
 
   has_many :statuses, dependent: :destroy
-  has_many :replies, dependent: :destroy
   has_many :photos, dependent: :destroy
 
   # has_many :friends, through: :friendships
@@ -105,7 +102,7 @@
   validates :email, presence: :true, uniqueness: true,
             format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :birth_date, presence: true
-  # validate :validate_gender
+  validate :validate_gender
   validate :age
 
   def give_genders
@@ -176,10 +173,4 @@
     regenerate_token unless users.length == 1
     unique_token unless users.length == 1
   end
-
-  # def liked_posts
-  #   post_ids = likes.where(likeable_type: "Post").pluck(:likeable_id)
-  #   Post.find post_ids
-  # end
-
 end

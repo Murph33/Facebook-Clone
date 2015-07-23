@@ -96,16 +96,6 @@ ActiveRecord::Schema.define(version: 20150722184404) do
   add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
   add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
-  create_table "pastings", force: :cascade do |t|
-    t.integer  "photo_id"
-    t.integer  "album_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "pastings", ["album_id"], name: "index_pastings_on_album_id", using: :btree
-  add_index "pastings", ["photo_id"], name: "index_pastings_on_photo_id", using: :btree
-
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at",  null: false
@@ -139,17 +129,6 @@ ActiveRecord::Schema.define(version: 20150722184404) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
-
-  create_table "replies", force: :cascade do |t|
-    t.text     "body"
-    t.integer  "comment_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "replies", ["comment_id"], name: "index_replies_on_comment_id", using: :btree
-  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "requests", force: :cascade do |t|
     t.integer  "requester_id"
@@ -201,13 +180,9 @@ ActiveRecord::Schema.define(version: 20150722184404) do
   add_foreign_key "comments", "users"
   add_foreign_key "jobs", "users"
   add_foreign_key "likes", "users"
-  add_foreign_key "pastings", "albums"
-  add_foreign_key "pastings", "photos"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "replies", "comments"
-  add_foreign_key "replies", "users"
   add_foreign_key "statuses", "users"
   add_foreign_key "taggings", "photos"
   add_foreign_key "taggings", "users"

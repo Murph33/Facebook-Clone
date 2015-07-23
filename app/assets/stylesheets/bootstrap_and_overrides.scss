@@ -19,6 +19,15 @@
   }
 }
 
+.white {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+
 div.modal-body-text {
   text-align: left;
 }

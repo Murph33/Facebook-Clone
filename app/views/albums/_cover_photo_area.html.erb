@@ -7,7 +7,7 @@
     <% end %>
     <%= image_tag @user.picture.url(:large), id: "cover_photo_user"  %>
     <div id="cover_photo_text">
-      <%= @user.full_name %>
+      <%= link_to @user.full_name, @user %>
     </div>
     <% if current_user == @user %>
       <div class="inline" id="cover_photo_change">

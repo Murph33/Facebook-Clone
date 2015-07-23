@@ -24,7 +24,7 @@ class CoverPhotoUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  process resize_to_fit: [1200, 800]
+  process resize_to_fit: [904, 315]
 
   version :cover_photo do
     process resize_to_fill: [904, 315]

@@ -7,7 +7,7 @@
     <% end %>
     <%= image_tag @user.picture.url(:large), id: "cover_photo_user"  %>
     <div id="cover_photo_text">
-      <%= @user.full_name %>
+      <%= link_to @user.full_name, @user, class:"white" %>
     </div>
     <% if current_user == @user %>
       <div class="inline" id="cover_photo_change">
@@ -17,7 +17,9 @@
         <% end %>
       </div>
     <% end %>
-    <% if current_user != @user && !(current_user.all_friends.include? @user) &&
+    <% if current_user.requesters.include? @user %>
+    <div class="add_friend_button  background_grey inline">Friend Request Received</div>
+    <% elsif current_user != @user && !(current_user.all_friends.include? @user) &&
                                   (!current_user.requestees.include? @user) %>
       <%= form_for [@user, @request], id:"friend_request_button", remote: true do |f| %>
       <div class="add_friend_button  background_grey inline">
