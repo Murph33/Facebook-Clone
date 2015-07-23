@@ -125,7 +125,7 @@
   end
 
   def newsfeed
-    (received_posts + statuses + photos).sort_by {|x| x.updated_at}.reverse
+    (received_posts + statuses + all_photos).sort_by {|x| x.updated_at}.reverse
   end
 
   def validate_gender

@@ -1,3 +1,15 @@
+<div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body inline width75">
+        <%= image_tag photo.image.url, class: "width100 inline" %>
+      </div>
+      <div class="modal-body-text">
+        <%= render "photos/photo_comment", photo: photo %>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="hello photo <%= dom_id(photo, :feed) %>">
   <div class="photo_top_half">
     <%= link_to photo.user do %>
@@ -21,19 +33,7 @@
       <button type="button" class="no_padding" data-toggle="modal" data-target="#<%= dom_id(photo) %>">
         <%= image_tag photo.image.url(:timeline), class: "width100" %>
       </button>
-      <div class="modal fade" id="<%= dom_id(photo) %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-body inline width75">
-              <%= image_tag photo.image.url, class: "width100 inline" %>
-            </div>
-            <div class="modal-body-text">
 
-              <%= render "photos/photo_comment", photo: photo %>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <% if photo.liking_users.include? current_user %>
       <%= link_to "Unlike", like_path(photo.like_for(current_user)), method: :delete, remote: true %>

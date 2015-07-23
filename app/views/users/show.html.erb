@@ -36,7 +36,7 @@
   </div>
   <div id="photo_box">
     <div id="photo_box_header">
-      <%= link_to "PHOTOS - #{@user.photos.length}", user_photos_of_path(@user), id: "photo_header_text" %>
+      <%= link_to "PHOTOS - #{@user.all_photos.length}", user_photos_of_path(@user), id: "photo_header_text" %>
     </div>
     <% 9.times do |i| %>
       <div class="col-lg-4 col-md-4 col-sm-4 small_padding">
