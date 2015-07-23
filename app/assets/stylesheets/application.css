@@ -13,9 +13,6 @@
  *= require_tree .
  *= require_self
  */
- /** {
-   border: 1px dashed black;
- }*/
 
  html, body {
  box-sizing: border-box;
@@ -181,14 +178,12 @@
 
  .width75 {
    width: 75%;
-   /*max-height: 550px;*/
+
  }
 
  .width100 {
    position: relative;
    width: 100%;
-   /*top: 50%;
-   transform: translateY(-50%);*/
  }
  .width25 {
    width: 25%;
@@ -239,11 +234,8 @@
   z-index: 1;
  }
 
- /*.spacer {
-   width: 10px;
-   height: 50px;
-   /*background-color: black;*/
- }*/
+
+
  .slim {
    height: 25px;
  }
@@ -349,8 +341,6 @@
 
  .comment_text {
    font-size: .9em;
-   /*width: auto;*/
-   /*float: right;*/
    overflow:auto;
    padding-left: 5px;
    word-wrap: break-word;
@@ -397,12 +387,7 @@
  .borderless2 {
    border-style: none;
    border-color: Transparent;
-   /*overflow: auto;*/
    outline: none;
-   /*-webkit-box-shadow: none;*/
-   /*-moz-box-shadow: none;*/
-   /*box-shadow: none;*/
-   /*resize: none;*/
  }
 
  .no_outline {
@@ -507,13 +492,12 @@
 
  #friend_box_header {
    position: relative;
-   /*right: -2px;*/
    width: 100%;
    background-color: #F6F7F8;
    height: 33px;
    border-bottom: 2px solid white;
-
  }
+
  #friend_header_text {
    position: absolute;
    left: 15px;
