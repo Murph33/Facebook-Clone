@@ -439,7 +439,7 @@
 }
 
  .navbar-right {
-   position: absolute;
+   /*position: absolute;*/
    float: right;
    right: 0px;
  }
