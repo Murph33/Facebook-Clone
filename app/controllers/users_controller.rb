@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @friends = (@user.all_friends).shuffle
-    @photos = @user.photos.order("created_at desc")
+    @photos = @user.photos.order("created_at desc").reverse
     @request = Request.new
     @events = Kaminari.paginate_array(@user.newsfeed).page(params[:page]).per(7)
     #SHOULD ADD SOMETHING THAT IS LIKE user.all_photos AND INCLUDED TAGGED PHOTOS.
