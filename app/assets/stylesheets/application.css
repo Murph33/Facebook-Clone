@@ -439,12 +439,13 @@
 }
 
  .navbar-right {
-   /*position: absolute;*/
    float: right;
    right: 0px;
  }
 
-
+.row {
+  margin: 0px;
+}
 
  .vivid {
    background-color: white;
