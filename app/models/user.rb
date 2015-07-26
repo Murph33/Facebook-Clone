@@ -104,6 +104,7 @@
   validates :birth_date, presence: true
   validate :validate_gender
   validate :age
+  validate :limit_users
 
   def give_genders
     POSSIBLE_GENDERS
@@ -173,4 +174,11 @@
     regenerate_token unless users.length == 1
     unique_token unless users.length == 1
   end
+
+  def limit_users
+    if User.where("created_at > ? ", 1.days.ago).length > 350
+      errors.add(:first_name,"24 hour limit of user creation has been reached")
+    end
+  end
+
 end

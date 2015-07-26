@@ -16,6 +16,7 @@
               remote_picture_url: "http://lorempixel.com/600/400/cats/",
               email: "#{i}@#{i}.com")
 end
+
 # LEWIS COLLIER
 # Profile.where(cover_photo: nil).each {|p| p.update(remote_cover_photo_url: "http:/lorempixel.com/904/315/nightlife/")}
 # User.all.each {|u| u.profile.update(remote_cover_photo_url: "http:/lorempixel.com/904/315/nightlife/"); p u.profile.errors}
