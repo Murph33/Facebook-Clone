@@ -4,7 +4,7 @@ $(document).ready(function(){
     $('#friends_chat_list').toggleClass("hidden")
   });
   $(document).on('click', 'div[friend-id]', function(){
-    $.get( "http://localhost:3000/messages/conversation.json", {user2: $(this).attr('friend-id')},
+    $.get( "http://fakestbook.herokuapp.com/messages/conversation.json", {user2: $(this).attr('friend-id')},
             function(data){
               var firstID = (data[0]["sender_id"] > data[0]["receiver_id"]) ?
                               data[0]["receiver_id"] : data[0]["sender_id"]
@@ -38,7 +38,7 @@ $(document).ready(function(){
   $(document).on('keyup', 'input.chat_input', function(e){
      if (e.which === 13) {
        e.preventDefault();
-       $.post("http://localhost:3000/messages",
+       $.post("http://fakestbook.herokuapp.com/messages",
               { message: { receiver_id: $(this).attr('receiver'),
                            body: $(this).val() }}, function(){
                               setTimeout(function(){
@@ -59,8 +59,8 @@ $(document).ready(function(){
   $(document).on('click', 'span.message_header_name', function(e){
     e.stopPropagation()
     var id = $(this).attr('friend_id')
-    window.location.href=("http://localhost:3000/users/" + id)
-    console.log("http://localhost:3000/users/" + id)
+    window.location.href=("http://fakestbook.herokuapp.com/users/" + id)
+    console.log("http://fakestbook.herokuapp.com/users/" + id)
   })
 
 });

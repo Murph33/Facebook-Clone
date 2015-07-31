@@ -25,6 +25,8 @@ gem "mini_magick"
 gem "quiet_assets"
 gem 'textacular'
 gem 'cocoon'
+gem 'redis'
+gem "rack-timeout"
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Capistrano for deployment
